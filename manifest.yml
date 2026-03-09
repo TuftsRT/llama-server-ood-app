@@ -1,0 +1,4 @@
+---
+name: LLaMA CPP Server
+role: batch_connect
+description: "A lightweight, [OpenAI API](https://github.com/openai/openai-openapi) compatible, HTTP server for serving LLMs."
