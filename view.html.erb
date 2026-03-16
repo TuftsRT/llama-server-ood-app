@@ -1,4 +1,4 @@
-<p>
+<div class="d-grid gap-3">
   <div class="input-group">
     <span class="input-group-text" style="width: 6em;"><strong>
       Base URL
@@ -10,8 +10,6 @@
       data-target="base-url" style="aspect-ratio: 1 / 1;"
       title="Copy Base URL"></button>
   </div>
-</p>
-<p>
   <div class="input-group">
         <span class="input-group-text" style="width: 6em;"><strong>
       API Key
@@ -23,16 +21,18 @@
       data-target="api-key" style="aspect-ratio: 1 / 1;"
       title="Copy API Key"></button>
   </div>
-</p>
+</div>
 <hr />
-<a href="/rnode/<%= host %>/<%= port %>/"
-  class="btn btn-primary" fa-eye ">
-  <i class="fa fa-eye"></i> Launch Web UI
-</a>
-<a href="/pun/sys/dashboard/files/fs/<%= output_log %>"
-  class="btn btn-secondary">
-  <i class="fa fa-file-text"></i> View Server Log
-</a>
+<div class="d-flex gap-2">
+  <a href="/rnode/<%= host %>/<%= port %>/"
+    class="btn btn-primary" fa-eye ">
+    <i class="fa fa-eye"></i> Launch Web UI
+  </a>
+  <a href="/pun/sys/dashboard/files/fs/<%= output_log %>"
+    class="btn btn-secondary">
+    <i class="fa fa-file-text"></i> View Server Log
+  </a>
+</div>
 
 <script>
 localStorage.setItem('LlamaCppWebui.config', '{"apiKey":"<%= password %>"}');
