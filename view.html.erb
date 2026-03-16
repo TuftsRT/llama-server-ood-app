@@ -1,0 +1,47 @@
+<p>
+  <div class="input-group">
+    <span class="input-group-text" style="width: 6em;"><strong>
+      Base URL
+    </strong></span>
+    <span id="base-url" class="form-control"><code id="base-url">
+      http://<%= host %>.pax.tufts.edu:<%= port %>
+    </code></span>
+    <button class="btn btn-light far fa-copy copy-btn" type="button"
+      data-target="base-url" style="aspect-ratio: 1 / 1;"
+      title="Copy Base URL"></button>
+  </div>
+</p>
+<p>
+  <div class="input-group">
+        <span class="input-group-text" style="width: 6em;"><strong>
+      API Key
+    </strong></span>
+    <span id="api-key" class="form-control"><code id="api-key">
+      <%= password %></code>
+    </span>
+    <button class="btn btn-light far fa-copy copy-btn" type="button"
+      data-target="api-key" style="aspect-ratio: 1 / 1;"
+      title="Copy API Key"></button>
+  </div>
+</p>
+<hr />
+<a class="btn btn-primary" fa-eye href="/rnode/<%= host %>/<%= port %>/">
+  <i class="fa fa-eye"></i> Launch Web UI
+</a>
+
+<script>
+localStorage.setItem('LlamaCppWebui.config', '{"apiKey":"<%= password %>"}');
+document.querySelectorAll('.copy-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const targetId = btn.getAttribute('data-target');
+    const code = document.getElementById(targetId).innerText;
+    navigator.clipboard.writeText(code);
+    btn.classList.remove('fa-copy');
+    btn.classList.add('fa-check-square');
+    setTimeout(() => {
+      btn.classList.remove('fa-check-square');
+      btn.classList.add('fa-copy');
+    }, 1000);
+  });
+});
+</script>
