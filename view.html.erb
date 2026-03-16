@@ -28,6 +28,10 @@
 <a class="btn btn-primary" fa-eye href="/rnode/<%= host %>/<%= port %>/">
   <i class="fa fa-eye"></i> Launch Web UI
 </a>
+<a href="/pun/sys/dashboard/files/fs/<%= output_log %>"
+  class="btn btn-secondary">
+  <i class="fa fa-file-text"></i> View Server Log
+</a>
 
 <script>
 localStorage.setItem('LlamaCppWebui.config', '{"apiKey":"<%= password %>"}');
