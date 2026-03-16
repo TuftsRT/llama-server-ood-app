@@ -35,18 +35,18 @@
 </div>
 
 <script>
-localStorage.setItem('LlamaCppWebui.config', '{"apiKey":"<%= password %>"}');
-document.querySelectorAll('.copy-btn').forEach(btn => {
-  btn.addEventListener('click', function() {
-    const targetId = btn.getAttribute('data-target');
-    const code = document.getElementById(targetId).innerText;
-    navigator.clipboard.writeText(code);
-    btn.classList.remove('fa-copy');
-    btn.classList.add('fa-check-square');
-    setTimeout(() => {
-      btn.classList.remove('fa-check-square');
-      btn.classList.add('fa-copy');
-    }, 1500);
+  localStorage.setItem('LlamaCppWebui.config', '{"apiKey":"<%= password %>"}');
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const targetId = btn.getAttribute('data-target');
+      const code = document.getElementById(targetId).innerText;
+      navigator.clipboard.writeText(code);
+      btn.classList.remove('fa-copy');
+      btn.classList.add('fa-check-square');
+      setTimeout(() => {
+        btn.classList.remove('fa-check-square');
+        btn.classList.add('fa-copy');
+      }, 1500);
+    });
   });
-});
 </script>
