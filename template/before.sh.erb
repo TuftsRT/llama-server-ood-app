@@ -1,4 +1,4 @@
 #! /bin/bash
 export output_log="<%= session.staged_root.join("output.log") %>"
-export password="$(create_passwd)"
+export password="<%= context.api_key %>"
 export port="$(find_port)"

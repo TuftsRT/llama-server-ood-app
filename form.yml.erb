@@ -14,6 +14,8 @@ form:
   - "gpu_model"
   - "num_gpu"
   - "allow_preempt"
+  - "use_random_key"
+  - "api_key"
 
 attributes:
   num_hours:
@@ -261,3 +263,27 @@ attributes:
       Gain access to reserved resources and potentially start the job sooner
       by allowing your job to be preempted (terminated without warning) if
       higher-priority jobs need resources.
+
+  use_random_key:
+    widget: "check_box"
+    label: "Use Random API Key (Recommended)"
+    cacheable: false
+    help: |
+      Automatically generate a random API key. Uncheck to specify your own.
+      The key will be displayed on the job information card after job start.
+    value: "1"
+    data:
+      hide-api-key-when-checked: true
+
+
+  api_key:
+    widget: "text_field"
+    label: "API Key"
+    cacheable: false
+    required: true
+    help: |
+      Must be difficult to guess and consist of at least 32 alphanumeric
+      [a-zA-Z0-9] characters. **Anyone with the API key can access the server
+      along with any data sent to it.**
+    value: "<%= Array.new(32){[*'0'..'9', *'A'..'Z', *'a'..'z'].sample}.join %>"
+    pattern: "^[a-zA-Z0-9]{32,}$"
