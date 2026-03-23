@@ -1,0 +1,263 @@
+---
+cluster: "pax"
+
+form:
+  - "num_hours"
+  - "use_preset"
+  - "resource_preset"
+  - "preset_multiplier"
+  - "num_cores"
+  - "memory_ram"
+  - "gpu_preference"
+  - "min_vram"
+  - "exact_vram"
+  - "gpu_model"
+  - "num_gpu"
+  - "allow_preempt"
+
+attributes:
+  num_hours:
+    widget: "number_field"
+    label: "Hours"
+    cacheable : false
+    required: true
+    help: |
+      Upper limit for the job runtime in hours.
+      Jobs exceeding this limit will be terminated.
+      Higher values might delay job start.
+      Maximum allowed runtime is 48 hours.
+    value: 1
+    min: 1
+    max: 48
+    step: 1
+
+  use_preset:
+    widget: "select"
+    label: "Resource Preference"
+    help: |
+      Ensure the selected configuration is possible if not using presets.
+      Consult the [system status dashboard](/pun/sys/dashboard/system-status)
+      for node configuration details and current resource availability.
+    value: "1"
+    options:
+      - [
+          "Use Resource Presets (Recommended)",
+          "1",
+          data-hide-num-cores: true,
+          data-hide-memory-ram: true,
+          data-hide-gpu-preference: true,
+          data-hide-min-vram: true,
+          data-hide-exact-vram: true,
+          data-hide-gpu-model: true,
+          data-hide-num-gpu: true,
+          data-hide-allow-preempt: true,
+        ]
+      - [
+          "Manually Specify Configuration (Advanced)",
+          "0",
+          data-hide-resource-preset: true,
+          data-hide-preset-multiplier: true,
+          data-set-gpu-preference: "none",
+          data-hide-min-vram: true,
+          data-hide-exact-vram: true,
+          data-hide-gpu-model: true,
+          data-hide-num-gpu: true,
+        ]
+
+  resource_preset:
+    widget: "select"
+    label: "Resource Preset"
+    cacheable : false
+    help: |
+      Choose a preset that accommodates the model you are planning on using.
+      Models that can completely fit into VRAM will have optimal performance.
+      Models that exceed the combined total of RAM and VRAM cannot be used.
+      Preset values can be multiplied below if more resources are needed.
+      Jobs that request more resources take longer to start.
+    value: "a100-96-4"
+    options:
+      - [
+          "A100 GPU / 40 GB VRAM / 96 GB RAM / 4 CPU",
+          "a100-96-4",
+          data-max-preset-multiplier: 8,
+        ]
+
+      - [
+          "A100 GPU / 40 GB VRAM / 128 GB RAM / 8 CPU",
+          "a100-128-8",
+          data-max-preset-multiplier: 8,
+        ]
+      - [
+          "L40S GPU / 48 GB VRAM / 128 GB RAM / 16 CPU",
+          "l40s-128-16",
+          data-max-preset-multiplier: 4,
+        ]
+      - [
+          "H200 GPU / 140 GB VRAM / 196 GB RAM / 12 CPU",
+          "h200-196-12",
+          data-max-preset-multiplier: 8,
+        ]
+
+  preset_multiplier:
+    widget: "number_field"
+    label: "Preset Multiplier"
+    cacheable : false
+    required: true
+    help: |
+      Multiplies the resources of the selected preset by the this value.
+      For example, the preset "A100 GPU / 40 GB VRAM / 128 GB RAM / 8 CPU"
+      with a multiplier of two (2) results in two A100 GPUs, 80 GB VRAM,
+      256 GB RAM, and 16 CPU cores. The maximum allowed multiplier is four (4)
+      for the L40S preset and eight (8) for all other presets.
+    value: 1
+    min: 1
+    max: 8
+    step: 1
+
+  num_cores:
+    widget: "select"
+    label: "CPU Cores"
+    cacheable : false
+    required: true
+    help: "Higher values increase performance but might delay job start."
+    value: "4"
+    options:
+      - "4"
+      - "8"
+      - "12"
+      - "16"
+      - "24"
+      - "32"
+      - "48"
+      - "64"
+      - "96"
+
+  memory_ram:
+    widget: "select"
+    label: "Memory (RAM)"
+    cacheable : false
+    help: |
+      RAM is used when no GPU is selected or when the whole model cannot fit
+      into VRAM. Higher values increase performance but might delay job start.
+    value: "8g"
+    options:
+      - ["8 GB", "8g"]
+      - ["16 GB", "16g"]
+      - ["32 GB", "32g"]
+      - ["64 GB", "64g"]
+      - ["96 GB", "96g"]
+      - ["128 GB", "128g"]
+      - ["192 GB", "192g"]
+      - ["256 GB", "256g"]
+      - ["384 GB", "384g"]
+      - ["512 GB", "512g"]
+      - ["768 GB", "768g"]
+      - ["1024 GB", "1024g"]
+      - ["1536 GB", "1536g"]
+
+  gpu_preference:
+    widget: "select"
+    label: "GPU Preference"
+    cacheable : false
+    help: |
+      Not selecting a GPU decreases performance but might allow your job to
+      start sooner. Optimal performance requires total VRAM that can fit the
+      entire model and batch size.
+    value: "none"
+    options:
+      - [
+          "No GPU (No VRAM)",
+          "none",
+          data-hide-min-vram: true,
+          data-hide-exact-vram: true,
+          data-hide-gpu-model: true,
+          data-hide-num-gpu: true,
+        ]
+      - [
+          "Any GPU (≥ 40 GB VRAM)",
+          "any",
+          data-hide-min-vram: true,
+          data-hide-exact-vram: true,
+          data-hide-gpu-model: true,
+        ]
+      - [
+          "Minimum VRAM Requirement",
+          "min-vram",
+          data-hide-exact-vram: true,
+          data-hide-gpu-model: true,
+        ]
+      - [
+          "Exact VRAM Requirement",
+          "exact-vram",
+          data-hide-min-vram: true,
+          data-hide-gpu-model: true,
+        ]
+      - [
+          "Choose Specific GPU Model",
+          "gpu-model",
+          data-hide-min-vram: true,
+          data-hide-exact-vram: true,
+        ]
+
+  min_vram:
+    widget: "select"
+    label: "Minimum VRAM"
+    cacheable: false
+    help: |
+      Automatically select a GPU with VRAM equalling or exceeding the
+      selected option. Higher values might delay job start.
+    value: "a100|l40|l40s|h200"
+    options:
+      - ["40 GB", "a100|l40|l40s|h200"]
+      - ["48 GB", "l40|l40s|h200"]
+      - ["140 GB", "h200"]
+
+  exact_vram:
+    widget: "select"
+    label: "Exact VRAM"
+    cacheable: false
+    help: |
+      Automatically select a GPU with exactly the selected VRAM.
+      Subject to GPU availability.
+    value: "a100|l40|l40s|h200"
+    options:
+      - ["40 GB", "a100"]
+      - ["48 GB", "l40|l40s"]
+      - ["140 GB", "h200"]
+
+  gpu_model:
+    widget: "select"
+    label: "GPU Model (VRAM)"
+    cacheable: false
+    help: |
+      Only use if a specific GPU model is required.
+      Might delay job start due to GPU availability.
+    value: "a100"
+    options:
+      - ["A100 (40 GB)", "a100"]
+      - ["L40 (48 GB)", "l40"]
+      - ["L40S (48 GB)", "l40s"]
+      - ["H200 (140 GB)", "h200"]
+
+  num_gpu:
+    widget: "number_field"
+    label: "Number of GPUs"
+    cacheable: false
+    required: true
+    help: |
+      Number of multiples of the selected GPU to use. Total VRAM equals the
+      selected VRAM multiplied by this number. Higher values might delay job
+      start. Up to 8 GPUs possible.
+    value: 1
+    min: 1
+    max: 8
+    step: 1
+
+  allow_preempt:
+    widget: "check_box"
+    label: "Allow Preemption"
+    cacheable: false
+    help: |
+      Gain access to reserved resources and potentially start the job sooner
+      by allowing your job to be preempted (terminated without warning) if
+      higher-priority jobs need resources.

@@ -1,0 +1,47 @@
+---
+batch_connect:
+  template: "basic"
+  password_size: 32
+  conn_params:
+    - "output_log"
+script:
+  wall_time: <%= num_hours.to_i * 3600 %>
+  <% if use_preset == "1" %>
+    <% constraint, ram, n_cpu = resource_preset.split("-", 3) %>
+    <% ram = "#{ram.to_i * preset_multiplier.to_i}g" %>
+    <% n_cpu = (n_cpu.to_i * preset_multiplier.to_i) %>
+    <% n_gpu = preset_multiplier %>
+    <% partition = "gpu" %>
+  <% else %>
+    <% ram = memory_ram %>
+    <% n_cpu = num_cores %>
+    <% if gpu_preference == "none" %>
+      <% n_gpu = "0" %>
+      <% partition = "batch" %>
+    <% else %>
+      <% n_gpu = num_gpu %>
+      <% partition = "gpu" %>
+    <% end %>
+    <% if gpu_preference == "min-vram" %>
+      <% constraint = min_vram %>
+    <% elsif gpu_preference == "exact-vram" %>
+      <% constraint = exact_vram %>
+    <% elsif gpu_preference == "gpu-model" %>
+      <% constraint = gpu_model %>
+    <% end %>
+    <% if allow_preempt == "1" %>
+      <% partition = "#{partition},preempt" %>
+    <% end %>
+  <% end %>
+  native:
+    - "--mem=<%= ram %>"
+    - "--nodes=1"
+    - "--ntasks=1"
+    - "--cpus-per-task=<%= n_cpu %>"
+    - "--partition=<%= partition %>"
+  <% if n_gpu.to_i > 0 %>
+    - "--gres=gpu:<%= n_gpu %>"
+  <% end %>
+  <% if constraint.present? %>
+    - "--constraint=\"<%= constraint %>\""
+  <% end %>

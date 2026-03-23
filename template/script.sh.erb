@@ -1,0 +1,20 @@
+#!/bin/bash
+
+CONTAINER_DIR="/cluster/tufts/apps/container/ai/images"
+CPU_CONTAINER="$CONTAINER_DIR/llama-server-cpu.sif"
+GPU_CONTAINER="$CONTAINER_DIR/llama-server-gpu.sif"
+
+MODELS_DIR="/cluster/tufts/datasets/ai/models/gguf/"
+
+<% use_gpu = context.use_preset == "1" || context.gpu_preference != "none" %>
+
+module purge
+module load apptainer
+
+apptainer run \
+    <% if use_gpu %>--nv <%end%>\
+    <% if use_gpu %>"$GPU_CONTAINER" <% else %>"$CPU_CONTAINER" <% end %>\
+    --offline \
+    --port "$port" \
+    --api-key "$password" \
+    --models-dir "$MODELS_DIR"
