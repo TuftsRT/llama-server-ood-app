@@ -21,7 +21,7 @@ attributes:
   num_hours:
     widget: "number_field"
     label: "Hours"
-    cacheable : false
+    cacheable: false
     required: true
     help: |
       Upper limit for the job runtime in hours.
@@ -69,7 +69,7 @@ attributes:
   resource_preset:
     widget: "select"
     label: "Resource Preset"
-    cacheable : false
+    cacheable: false
     help: |
       Choose a preset that accommodates the model you are planning on using.
       Models that can completely fit into VRAM will have optimal performance.
@@ -103,7 +103,7 @@ attributes:
   preset_multiplier:
     widget: "number_field"
     label: "Preset Multiplier"
-    cacheable : false
+    cacheable: false
     required: true
     help: |
       Multiplies the resources of the selected preset by the this value.
@@ -119,7 +119,7 @@ attributes:
   num_cores:
     widget: "select"
     label: "CPU Cores"
-    cacheable : false
+    cacheable: false
     required: true
     help: "Higher values increase performance but might delay job start."
     value: "4"
@@ -137,7 +137,7 @@ attributes:
   memory_ram:
     widget: "select"
     label: "Memory (RAM)"
-    cacheable : false
+    cacheable: false
     help: |
       RAM is used when no GPU is selected or when the whole model cannot fit
       into VRAM. Higher values increase performance but might delay job start.
@@ -160,7 +160,7 @@ attributes:
   gpu_preference:
     widget: "select"
     label: "GPU Preference"
-    cacheable : false
+    cacheable: false
     help: |
       Not selecting a GPU decreases performance but might allow your job to
       start sooner. Optimal performance requires total VRAM that can fit the
@@ -264,17 +264,29 @@ attributes:
       by allowing your job to be preempted (terminated without warning) if
       higher-priority jobs need resources.
 
+  # <% key_len = 32 %>
+  # <% api_key = Array.new(key_len){[*'0'..'9', *'A'..'Z', *'a'..'z'].sample}.join %>
+
   use_random_key:
-    widget: "check_box"
-    label: "Use Random API Key (Recommended)"
+    widget: "select"
+    label: "API Key Preference"
     cacheable: false
     help: |
-      Automatically generate a random API key. Uncheck to specify your own.
       The key will be displayed on the job information card after job start.
     value: "1"
-    data:
-      hide-api-key-when-checked: true
-
+    options:
+      - [
+          "Randomly Generate (Recommended)",
+          "1",
+          data-hide-api-key: true,
+          data-set-api-key: "<%= api_key %>",
+        ]
+      - [
+          "Manually Specify API Key (Advanced)",
+          "0",
+          data-show-api-key: true,
+          data-set-api-key: "",
+        ]
 
   api_key:
     widget: "text_field"
@@ -282,8 +294,8 @@ attributes:
     cacheable: false
     required: true
     help: |
-      Must be difficult to guess and consist of at least 32 alphanumeric
-      [a-zA-Z0-9] characters. **Anyone with the API key can access the server
-      along with any data sent to it.**
-    value: "<%= Array.new(32){[*'0'..'9', *'A'..'Z', *'a'..'z'].sample}.join %>"
-    pattern: "^[a-zA-Z0-9]{32,}$"
+      Must be difficult to guess and consist of at least <%= key_len %>
+      alphanumeric `[a-zA-Z0-9]` characters. **Anyone with the API key can
+      access the server along with any data sent to it.**
+    value: "<%= api_key %>"
+    pattern: "^[a-zA-Z0-9]{<%= key_len %>,}$"
