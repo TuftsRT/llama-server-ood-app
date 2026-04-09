@@ -176,7 +176,7 @@ attributes:
           data-hide-num-gpu: true,
         ]
       - [
-          "Any GPU (≥ 40 GB VRAM)",
+          "Any GPU (≥ 16 GB VRAM)",
           "any",
           data-hide-min-vram: true,
           data-hide-exact-vram: true,
@@ -208,10 +208,19 @@ attributes:
     help: |
       Automatically select a GPU with VRAM equalling or exceeding the
       selected option. Higher values might delay job start.
-    value: "a100|l40|l40s|h200"
+    value: "p100|v100|rtx_6000|rtx_a5000|a100-40G|l40|l40s|rtx_6000ada|rtx_a6000|a100-80G|h100|h200"
     options:
-      - ["40 GB", "a100|l40|l40s|h200"]
-      - ["48 GB", "l40|l40s|h200"]
+      - [
+          "16 GB",
+          "p100|v100|rtx_6000|rtx_a5000|a100-40G|l40|l40s|rtx_6000ada|rtx_a6000|a100-80G|h100|h200",
+        ]
+      - [
+          "24 GB",
+          "rtx_6000|rtx_a5000|a100-40G|l40|l40s|rtx_6000ada|rtx_a6000|a100-80G|h100|h200",
+        ]
+      - ["40 GB", "a100-40G|l40|l40s|rtx_6000ada|rtx_a6000|a100-80G|h100|h200"]
+      - ["48 GB", "l40|l40s|rtx_6000ada|rtx_a6000|a100-80G|h100|h200"]
+      - ["80 GB", "a100-80G|h100|h200"]
       - ["140 GB", "h200"]
 
   exact_vram:
@@ -221,10 +230,13 @@ attributes:
     help: |
       Automatically select a GPU with exactly the selected VRAM.
       Subject to GPU availability.
-    value: "a100|l40|l40s|h200"
+    value: "p100|v100"
     options:
-      - ["40 GB", "a100"]
-      - ["48 GB", "l40|l40s"]
+      - ["16 GB", "p100|v100"]
+      - ["24 GB", "rtx_6000|rtx_a5000"]
+      - ["40 GB", "a100-40G"]
+      - ["48 GB", "l40|l40s|rtx_6000ada|rtx_a6000"]
+      - ["80 GB", "a100-80G|h100"]
       - ["140 GB", "h200"]
 
   gpu_model:
@@ -234,11 +246,19 @@ attributes:
     help: |
       Only use if a specific GPU model is required.
       Might delay job start due to GPU availability.
-    value: "a100"
+    value: "p100"
     options:
-      - ["A100 (40 GB)", "a100"]
+      - ["P100 (16 GB)", "p100"]
+      - ["V100 (16 GB)", "v100"]
+      - ["RTX 6000 (24 GB)", "rtx_6000"]
+      - ["RTX A5000 (24 GB)", "rtx_a5000"]
+      - ["A100 (40 GB)", "a100-40G"]
       - ["L40 (48 GB)", "l40"]
       - ["L40S (48 GB)", "l40s"]
+      - ["RTX 6000 Ada (48 GB)", "rtx_6000ada"]
+      - ["RTX A6000 (48 GB)", "rtx_a6000"]
+      - ["A100 (80 GB)", "a100-80G"]
+      - ["H100 (80 GB)", "h100"]
       - ["H200 (140 GB)", "h200"]
 
   num_gpu:
