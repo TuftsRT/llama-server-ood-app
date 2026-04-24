@@ -25,7 +25,7 @@
 <hr />
 <div class="d-flex gap-2">
   <a href="/rnode/<%= host %>/<%= port %>/"
-    class="btn btn-primary" fa-eye ">
+    class="btn btn-primary" id="launch-button">
     <i class="fa fa-eye"></i> Launch Web UI
   </a>
   <a href="/pun/sys/dashboard/files/fs/<%= output_log %>"
@@ -35,7 +35,12 @@
 </div>
 
 <script>
-  localStorage.setItem('LlamaCppWebui.config', '{"apiKey":"<%= password %>"}');
+  document.getElementById('launch-button')
+    .addEventListener('mouseover', function() {
+      localStorage.setItem(
+        'LlamaCppWebui.config', '{"apiKey":"<%= password %>"}'
+      );
+    });
   document.querySelectorAll('.copy-btn').forEach(btn => {
     btn.addEventListener('click', function() {
       const targetId = btn.getAttribute('data-target');
