@@ -1,3 +1,4 @@
+# <% require "json" %>
 ---
 cluster: "pax"
 
@@ -206,30 +207,17 @@ attributes:
           { data-hide-exact-vram: true, data-hide-min-vram: true },
         ]
 
+  # <% load File.join(__dir__, "lib/gpu_config.rb") %>
+
   min_vram:
     widget: "select"
     label: "Minimum VRAM"
     cacheable: false
     help: |
-      Automatically select a GPU with VRAM equalling or exceeding the
+      Automatically select a GPU with VRAM equaling or exceeding the
       selected option. Higher values might delay job start.
-    value: "p100|v100|rtx_6000|rtx_a5000|a100-40G|l40|l40s|rtx_6000ada|rtx_a6000|a1\
-      00-80G|h100|h200"
-    options:
-      - [
-          "16 GB",
-          "p100|v100|rtx_6000|rtx_a5000|a100-40G|l40|l40s|rtx_6000ada|rtx_a60\
-            00|a100-80G|h100|h200",
-        ]
-      - [
-          "24 GB",
-          "rtx_6000|rtx_a5000|a100-40G|l40|l40s|rtx_6000ada|rtx_a6000|a100-80\
-            G|h100|h200",
-        ]
-      - [ "40 GB", "a100-40G|l40|l40s|rtx_6000ada|rtx_a6000|a100-80G|h100|h200" ]
-      - [ "48 GB", "l40|l40s|rtx_6000ada|rtx_a6000|a100-80G|h100|h200" ]
-      - [ "80 GB", "a100-80G|h100|h200" ]
-      - [ "140 GB", "h200" ]
+    value: "<%= min_vram_options.first.last %>"
+    options: <%= JSON.generate(min_vram_options) %>
 
   exact_vram:
     widget: "select"
@@ -238,14 +226,8 @@ attributes:
     help: |
       Automatically select a GPU with exactly the selected VRAM.
       Subject to GPU availability.
-    value: "p100|v100"
-    options:
-      - [ "16 GB", "p100|v100" ]
-      - [ "24 GB", "rtx_6000|rtx_a5000" ]
-      - [ "40 GB", "a100-40G" ]
-      - [ "48 GB", "l40|l40s|rtx_6000ada|rtx_a6000" ]
-      - [ "80 GB", "a100-80G|h100" ]
-      - [ "140 GB", "h200" ]
+    value: "<%= exact_vram_options.first.last %>"
+    options: <%= JSON.generate(exact_vram_options) %>
 
   gpu_model:
     widget: "select"
@@ -254,20 +236,8 @@ attributes:
     help: |
       Only use if a specific GPU model is required.
       Might delay job start due to GPU availability.
-    value: "p100"
-    options:
-      - [ "P100 (16 GB)", "p100" ]
-      - [ "V100 (16 GB)", "v100" ]
-      - [ "RTX 6000 (24 GB)", "rtx_6000" ]
-      - [ "RTX A5000 (24 GB)", "rtx_a5000" ]
-      - [ "A100 (40 GB)", "a100-40G" ]
-      - [ "L40 (48 GB)", "l40" ]
-      - [ "L40S (48 GB)", "l40s" ]
-      - [ "RTX 6000 Ada (48 GB)", "rtx_6000ada" ]
-      - [ "RTX A6000 (48 GB)", "rtx_a6000" ]
-      - [ "A100 (80 GB)", "a100-80G" ]
-      - [ "H100 (80 GB)", "h100" ]
-      - [ "H200 (140 GB)", "h200" ]
+    value: "<%= gpu_model_options.first.last %>"
+    options: <%= JSON.generate(gpu_model_options) %>
 
   num_gpu:
     widget: "number_field"
