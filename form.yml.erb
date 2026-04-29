@@ -45,25 +45,29 @@ attributes:
       - [
           "Use Resource Presets (Recommended)",
           "1",
-          data-hide-num-cores: true,
-          data-hide-memory-ram: true,
-          data-hide-gpu-preference: true,
-          data-hide-min-vram: true,
-          data-hide-exact-vram: true,
-          data-hide-gpu-model: true,
-          data-hide-num-gpu: true,
-          data-hide-allow-preempt: true,
+          {
+              data-hide-allow-preempt: true,
+              data-hide-exact-vram: true,
+              data-hide-gpu-model: true,
+              data-hide-gpu-preference: true,
+              data-hide-memory-ram: true,
+              data-hide-min-vram: true,
+              data-hide-num-cores: true,
+              data-hide-num-gpu: true,
+            },
         ]
       - [
           "Manually Specify Configuration (Advanced)",
           "0",
-          data-hide-resource-preset: true,
-          data-hide-preset-multiplier: true,
-          data-set-gpu-preference: "none",
-          data-hide-min-vram: true,
-          data-hide-exact-vram: true,
-          data-hide-gpu-model: true,
-          data-hide-num-gpu: true,
+          {
+              data-hide-exact-vram: true,
+              data-hide-gpu-model: true,
+              data-hide-min-vram: true,
+              data-hide-num-gpu: true,
+              data-hide-preset-multiplier: true,
+              data-hide-resource-preset: true,
+              data-set-gpu-preference: "none",
+            },
         ]
 
   resource_preset:
@@ -81,23 +85,23 @@ attributes:
       - [
           "A100 GPU / 40 GB VRAM / 96 GB RAM / 4 CPU",
           "a100-96-4",
-          data-max-preset-multiplier: 8,
+          { data-max-preset-multiplier: 8 },
         ]
 
       - [
           "A100 GPU / 40 GB VRAM / 128 GB RAM / 8 CPU",
           "a100-128-8",
-          data-max-preset-multiplier: 8,
+          { data-max-preset-multiplier: 8 },
         ]
       - [
           "L40S GPU / 48 GB VRAM / 128 GB RAM / 16 CPU",
           "l40s-128-16",
-          data-max-preset-multiplier: 4,
+          { data-max-preset-multiplier: 4 },
         ]
       - [
           "H200 GPU / 140 GB VRAM / 196 GB RAM / 12 CPU",
           "h200-196-12",
-          data-max-preset-multiplier: 8,
+          { data-max-preset-multiplier: 8 },
         ]
 
   preset_multiplier:
@@ -143,19 +147,19 @@ attributes:
       into VRAM. Higher values increase performance but might delay job start.
     value: "8g"
     options:
-      - ["8 GB", "8g"]
-      - ["16 GB", "16g"]
-      - ["32 GB", "32g"]
-      - ["64 GB", "64g"]
-      - ["96 GB", "96g"]
-      - ["128 GB", "128g"]
-      - ["192 GB", "192g"]
-      - ["256 GB", "256g"]
-      - ["384 GB", "384g"]
-      - ["512 GB", "512g"]
-      - ["768 GB", "768g"]
-      - ["1024 GB", "1024g"]
-      - ["1536 GB", "1536g"]
+      - [ "8 GB", "8g" ]
+      - [ "16 GB", "16g" ]
+      - [ "32 GB", "32g" ]
+      - [ "64 GB", "64g" ]
+      - [ "96 GB", "96g" ]
+      - [ "128 GB", "128g" ]
+      - [ "192 GB", "192g" ]
+      - [ "256 GB", "256g" ]
+      - [ "384 GB", "384g" ]
+      - [ "512 GB", "512g" ]
+      - [ "768 GB", "768g" ]
+      - [ "1024 GB", "1024g" ]
+      - [ "1536 GB", "1536g" ]
 
   gpu_preference:
     widget: "select"
@@ -170,35 +174,36 @@ attributes:
       - [
           "No GPU (No VRAM)",
           "none",
-          data-hide-min-vram: true,
-          data-hide-exact-vram: true,
-          data-hide-gpu-model: true,
-          data-hide-num-gpu: true,
+          {
+              data-hide-exact-vram: true,
+              data-hide-gpu-model: true,
+              data-hide-min-vram: true,
+              data-hide-num-gpu: true,
+            },
         ]
       - [
           "Any GPU (≥ 16 GB VRAM)",
           "any",
-          data-hide-min-vram: true,
-          data-hide-exact-vram: true,
-          data-hide-gpu-model: true,
+          {
+              data-hide-exact-vram: true,
+              data-hide-gpu-model: true,
+              data-hide-min-vram: true,
+            },
         ]
       - [
           "Minimum VRAM Requirement",
           "min-vram",
-          data-hide-exact-vram: true,
-          data-hide-gpu-model: true,
+          { data-hide-exact-vram: true, data-hide-gpu-model: true },
         ]
       - [
           "Exact VRAM Requirement",
           "exact-vram",
-          data-hide-min-vram: true,
-          data-hide-gpu-model: true,
+          { data-hide-gpu-model: true, data-hide-min-vram: true },
         ]
       - [
           "Choose Specific GPU Model",
           "gpu-model",
-          data-hide-min-vram: true,
-          data-hide-exact-vram: true,
+          { data-hide-exact-vram: true, data-hide-min-vram: true },
         ]
 
   min_vram:
@@ -208,20 +213,23 @@ attributes:
     help: |
       Automatically select a GPU with VRAM equalling or exceeding the
       selected option. Higher values might delay job start.
-    value: "p100|v100|rtx_6000|rtx_a5000|a100-40G|l40|l40s|rtx_6000ada|rtx_a6000|a100-80G|h100|h200"
+    value: "p100|v100|rtx_6000|rtx_a5000|a100-40G|l40|l40s|rtx_6000ada|rtx_a6000|a1\
+      00-80G|h100|h200"
     options:
       - [
           "16 GB",
-          "p100|v100|rtx_6000|rtx_a5000|a100-40G|l40|l40s|rtx_6000ada|rtx_a6000|a100-80G|h100|h200",
+          "p100|v100|rtx_6000|rtx_a5000|a100-40G|l40|l40s|rtx_6000ada|rtx_a60\
+            00|a100-80G|h100|h200",
         ]
       - [
           "24 GB",
-          "rtx_6000|rtx_a5000|a100-40G|l40|l40s|rtx_6000ada|rtx_a6000|a100-80G|h100|h200",
+          "rtx_6000|rtx_a5000|a100-40G|l40|l40s|rtx_6000ada|rtx_a6000|a100-80\
+            G|h100|h200",
         ]
-      - ["40 GB", "a100-40G|l40|l40s|rtx_6000ada|rtx_a6000|a100-80G|h100|h200"]
-      - ["48 GB", "l40|l40s|rtx_6000ada|rtx_a6000|a100-80G|h100|h200"]
-      - ["80 GB", "a100-80G|h100|h200"]
-      - ["140 GB", "h200"]
+      - [ "40 GB", "a100-40G|l40|l40s|rtx_6000ada|rtx_a6000|a100-80G|h100|h200" ]
+      - [ "48 GB", "l40|l40s|rtx_6000ada|rtx_a6000|a100-80G|h100|h200" ]
+      - [ "80 GB", "a100-80G|h100|h200" ]
+      - [ "140 GB", "h200" ]
 
   exact_vram:
     widget: "select"
@@ -232,12 +240,12 @@ attributes:
       Subject to GPU availability.
     value: "p100|v100"
     options:
-      - ["16 GB", "p100|v100"]
-      - ["24 GB", "rtx_6000|rtx_a5000"]
-      - ["40 GB", "a100-40G"]
-      - ["48 GB", "l40|l40s|rtx_6000ada|rtx_a6000"]
-      - ["80 GB", "a100-80G|h100"]
-      - ["140 GB", "h200"]
+      - [ "16 GB", "p100|v100" ]
+      - [ "24 GB", "rtx_6000|rtx_a5000" ]
+      - [ "40 GB", "a100-40G" ]
+      - [ "48 GB", "l40|l40s|rtx_6000ada|rtx_a6000" ]
+      - [ "80 GB", "a100-80G|h100" ]
+      - [ "140 GB", "h200" ]
 
   gpu_model:
     widget: "select"
@@ -248,18 +256,18 @@ attributes:
       Might delay job start due to GPU availability.
     value: "p100"
     options:
-      - ["P100 (16 GB)", "p100"]
-      - ["V100 (16 GB)", "v100"]
-      - ["RTX 6000 (24 GB)", "rtx_6000"]
-      - ["RTX A5000 (24 GB)", "rtx_a5000"]
-      - ["A100 (40 GB)", "a100-40G"]
-      - ["L40 (48 GB)", "l40"]
-      - ["L40S (48 GB)", "l40s"]
-      - ["RTX 6000 Ada (48 GB)", "rtx_6000ada"]
-      - ["RTX A6000 (48 GB)", "rtx_a6000"]
-      - ["A100 (80 GB)", "a100-80G"]
-      - ["H100 (80 GB)", "h100"]
-      - ["H200 (140 GB)", "h200"]
+      - [ "P100 (16 GB)", "p100" ]
+      - [ "V100 (16 GB)", "v100" ]
+      - [ "RTX 6000 (24 GB)", "rtx_6000" ]
+      - [ "RTX A5000 (24 GB)", "rtx_a5000" ]
+      - [ "A100 (40 GB)", "a100-40G" ]
+      - [ "L40 (48 GB)", "l40" ]
+      - [ "L40S (48 GB)", "l40s" ]
+      - [ "RTX 6000 Ada (48 GB)", "rtx_6000ada" ]
+      - [ "RTX A6000 (48 GB)", "rtx_a6000" ]
+      - [ "A100 (80 GB)", "a100-80G" ]
+      - [ "H100 (80 GB)", "h100" ]
+      - [ "H200 (140 GB)", "h200" ]
 
   num_gpu:
     widget: "number_field"
@@ -298,15 +306,9 @@ attributes:
       - [
           "Randomly Generate (Recommended)",
           "1",
-          data-hide-api-key: true,
-          data-set-api-key: "<%= api_key %>",
+          { data-hide-api-key: true, data-set-api-key: "<%= api_key %>" },
         ]
-      - [
-          "Manually Specify API Key (Advanced)",
-          "0",
-          data-show-api-key: true,
-          data-set-api-key: "",
-        ]
+      - [ "Manually Specify API Key (Advanced)", "0", { data-set-api-key: "" } ]
 
   api_key:
     widget: "text_field"
