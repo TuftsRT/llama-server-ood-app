@@ -15,6 +15,14 @@ form:
   - "gpu_model"
   - "num_gpu"
   - "allow_preempt"
+  - "use_router"
+  - "use_default_models"
+  - "models_dir"
+  - "models_ini"
+  - "use_custom_model"
+  - "model_selection"
+  - "model_file"
+  - "mmproj_file"
   - "use_random_key"
   - "api_key"
 
@@ -261,6 +269,186 @@ attributes:
       Gain access to reserved resources and potentially start the job sooner
       by allowing your job to be preempted (terminated without warning) if
       higher-priority jobs need resources.
+
+  # <% load File.join(__dir__, "lib/model_discovery.rb") %>
+  # <% models_dir = "/cluster/tufts/datasets/ai/models/gguf" %>
+  # <% models = discover_models(models_dir) %>
+
+  use_router:
+    widget: "select"
+    label: "Server Mode"
+    value: "1"
+    help: |
+      Router mode is *experimental* and allows for the dynamic loading and
+      unloading of multiple models from a specified directory. Classic mode
+      preloads a single specified model that cannot be changed without
+      cancelling the job and submitting a new one.
+    options:
+      - [
+          "Router (Multi-Model)",
+          "1",
+          {
+              data-hide-mmproj-file: true,
+              data-hide-model-file: true,
+              data-hide-model-selection: true,
+              data-hide-models-dir: true,
+              data-hide-models-ini: true,
+              data-hide-use-custom-model: true,
+              data-set-mmproj-file: "<%= models.first_mmproj_path %>",
+              data-set-model-file: "<%= models.first_model_path %>",
+              data-set-model-selection: "<%= models.first_model_path %>",
+            },
+        ]
+      - [
+          "Classic (Single-Model)",
+          "0",
+          {
+              data-hide-mmproj-file: true,
+              data-hide-model-file: true,
+              data-hide-models-dir: true,
+              data-hide-models-ini: true,
+              data-hide-use-default-models: true,
+              data-set-models-dir: "<%= models_dir %>",
+              data-set-use-custom-model: "0",
+              data-set-use-default-models: "1",
+            },
+        ]
+
+  use_default_models:
+    widget: "select"
+    label: "Model Set"
+    value: "1"
+    help: |
+      The default set contains a curated selection of pre-downloaded models.
+    options:
+      - [
+          "Default (Recommended)",
+          "1",
+          {
+              data-hide-models-dir: true,
+              data-hide-models-ini: true,
+              data-set-models-dir: "<%= models_dir %>",
+              data-set-models-ini: "",
+            },
+        ]
+      - [
+          "Custom (Advanced)",
+          "0",
+          { data-set-models-dir: "", data-set-models-ini: "" },
+        ]
+
+  models_dir:
+    widget: "text_field"
+    label: "Models Directory"
+    help: |
+      <p style="margin-bottom: 0">
+        Path to a directory containing model files in GGUF format. Refer to the
+        <a href="https://github.com/ggml-org/llama.cpp/tree/master/tools/server#model-sources">
+          LLaMA CPP Server documentation
+        </a>
+        for the expected directory structure and file naming conventions.
+      </p>
+      <ul>
+        <li>
+          <code>/cluster/home/<%= ENV['USER'] %>/.../&lt;models-dir&gt;</code>
+        </li>
+        <li>
+          <code>/cluster/tufts/&lt;project&gt;/.../&lt;models-dir&gt;</code>
+        </li>
+      </ul>
+    value: "<%= models_dir %>"
+    pattern: |-
+      ^/(cluster/(tufts|home)/[A-Za-z0-9_\-\.]+(/[A-Za-z0-9_\-\.]+)*)/?$
+
+  models_ini:
+    widget: "text_field"
+    label: "Model Presets File"
+    help: |
+      <p style="margin-bottom: 0">
+        Path to an INI file defining model presets. Refer to the
+        <a href="https://github.com/ggml-org/llama.cpp/tree/master/tools/server#model-presets">
+          LLaMA CPP Server documentation
+        </a>
+        for the required file structure, example content, and preset options.
+      </p>
+      <ul>
+        <li>
+          <code>/cluster/home/<%= ENV['USER'] %>/.../&lt;presets&gt;.ini</code>
+        </li>
+        <li>
+          <code>/cluster/tufts/&lt;project&gt;/.../&lt;presets&gt;.ini</code>
+        </li>
+      </ul>
+    value: ""
+    pattern: |-
+      ^/(cluster/(tufts|home)/[A-Za-z0-9_\-\.]+(/[A-Za-z0-9_\-\.]+)*)\.ini$
+
+  use_custom_model:
+    widget: "select"
+    label: "Model Preference"
+    value: "0"
+    options:
+      - [
+          "Select Pre-Downloaded Model (Recommended)",
+          "0",
+          {
+              data-hide-mmproj-file: true,
+              data-hide-model-file: true,
+              data-set-mmproj-file: "<%= models.first_mmproj_path %>",
+              data-set-model-file: "<%= models.first_model_path %>",
+              data-set-model-selection: "<%= models.first_model_path %>",
+            },
+        ]
+      - [
+          "Manually Specify Custom Model File (Advanced)",
+          "1",
+          {
+              data-hide-model-selection: true,
+              data-set-mmproj-file: "",
+              data-set-model-file: "",
+            },
+        ]
+
+  model_selection:
+    widget: "select"
+    label: "Pre-Downloaded Model"
+    value: "<%= models.first_model_path %>"
+    options: <%= JSON.generate(models.options) %>
+
+  model_file:
+    widget: "text_field"
+    label: "Model File"
+    required: true
+    help: |
+      <p style="margin-bottom: 0">
+        Path to a model file in GGUF format. For sharded models, specify the
+        path to the first file (ending in <code>00001-of-?????.gguf</code>)
+        and ensure all related files are in the same directory.
+      </p>
+      <ul>
+        <li><code>/cluster/home/<%= ENV['USER'] %>/.../&lt;model&gt;[-00001-of-?????].gguf</code></li>
+        <li><code>/cluster/tufts/&lt;project&gt;/.../&lt;model&gt;[-00001-of-?????].gguf</code></li>
+      </ul>
+    value: "<%= models.first_model_path %>"
+    pattern: |-
+      ^/(cluster/(tufts|home)/[A-Za-z0-9_\-\.]+(/[A-Za-z0-9_\-\.]+)*)\.gguf$
+
+  mmproj_file:
+    widget: "text_field"
+    label: "Multi-Modal Projector"
+    help: |
+      <p style="margin-bottom: 0;">
+        Path to a multi-modal projector (MMProj) file in GGUF format.
+        Needed for multi-modal capabilities for supported models and
+        usually distributed alongside the model file(s).
+      </p>
+      <ul>
+        <li><code>/cluster/home/<%= ENV['USER'] %>/.../mmproj-&lt;dtype&gt;.gguf</code></li>
+        <li><code>/cluster/tufts/&lt;project&gt;/.../mmproj-&lt;dtype&gt;.gguf</code></li>
+      </ul>
+    value: "<%= models.first_mmproj_path %>"
+    pattern: |-
+      ^/(cluster/(tufts|home))(?:/[A-Za-z0-9_\-\.]+)*/mmproj-[A-Za-z0-9_-]+\.gguf$
 
   # <% key_len = 32 %>
   # <% api_key = Array.new(key_len){[*'0'..'9', *'A'..'Z', *'a'..'z'].sample}.join %>

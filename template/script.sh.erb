@@ -4,9 +4,7 @@ CONTAINER_DIR="/cluster/tufts/apps/container/ai/images"
 CPU_CONTAINER="$CONTAINER_DIR/llama-server-cpu.sif"
 GPU_CONTAINER="$CONTAINER_DIR/llama-server-gpu.sif"
 
-MODELS_DIR="/cluster/tufts/datasets/ai/models/gguf/"
-
-<% use_gpu = context.use_preset == "1" || context.gpu_preference != "none" %>
+# <% use_gpu = context.use_preset == "1" || context.gpu_preference != "none" %>
 
 module purge
 module load apptainer
@@ -17,4 +15,7 @@ apptainer run \
     --offline \
     --port "$port" \
     --api-key "$password" \
-    --models-dir "$MODELS_DIR"
+    <% if context.use_router == "0" %>--model "<%= context.model_file %>" <% end %>\
+    <% if context.use_router == "0" && context.mmproj_file.present? %>--mmproj "<%= context.mmproj_file %>" <% end %>\
+    <% if context.use_router == "1" && context.models_dir.present? %>--models-dir "<%= context.models_dir %>" <% end %>\
+    <% if context.use_router == "1" && context.models_ini.present? %>--models-preset "<%= context.models_ini %>" <% end %>

@@ -2,7 +2,10 @@
   "cSpell.words": [
     "apptainer",
     "cpus",
+    "dtype",
+    "gguf",
     "gres",
+    "mmproj",
     "ntasks",
     "rnode",
     "webui"
