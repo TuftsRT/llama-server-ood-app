@@ -25,6 +25,10 @@ form:
   - "mmproj_file"
   - "use_random_key"
   - "api_key"
+  - "ctx_size"
+  - "n_predict"
+  - "batch_size"
+  - "ubatch_size"
 
 attributes:
   num_hours:
@@ -479,3 +483,39 @@ attributes:
       access the server along with any data sent to it.**
     value: "<%= api_key %>"
     pattern: "^[a-zA-Z0-9]{<%= key_len %>,}$"
+
+  ctx_size:
+    widget: "number_field"
+    label: "Context Size"
+    required: true
+    help: "Size of the prompt context. Set to `0` to use model default."
+    value: 0
+    min: 0
+    step: 1
+
+  n_predict:
+    widget: "number_field"
+    label: "Tokens to Predict"
+    required: true
+    help: "Number of tokens to predict. Set to `-1` for infinity."
+    value: -1
+    min: -1
+    step: 1
+
+  batch_size:
+    widget: "number_field"
+    label: "Logical Batch Size"
+    required: true
+    help: "Logical maximum batch size."
+    value: 2048
+    min: 1
+    step: 1
+
+  ubatch_size:
+    widget: "number_field"
+    label: "Physical Batch Size"
+    required: true
+    help: "Physical maximum batch size."
+    value: 512
+    min: 1
+    step: 1

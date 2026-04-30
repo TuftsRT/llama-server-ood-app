@@ -23,6 +23,10 @@ APPTAINER_FLAGS=()
 # shellcheck disable=SC2154
 ARGS=(
     --threads "<%= n_cpu %>"
+    --ctx-size "<%= context.ctx_size %>"
+    --n-predict "<%= context.n_predict %>"
+    --batch-size "<%= context.batch_size %>"
+    --ubatch-size "<%= context.ubatch_size %>"
     --offline
     --port "$port"
     --api-key "$password"
