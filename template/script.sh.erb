@@ -5,6 +5,12 @@ CPU_CONTAINER="$CONTAINER_DIR/llama-server-cpu.sif"
 GPU_CONTAINER="$CONTAINER_DIR/llama-server-gpu.sif"
 
 # <% use_gpu = context.use_preset == "1" || context.gpu_preference != "none" %>
+# <% if context.use_preset == "1" %>
+#   <% n_cpu = context.resource_preset.split("/", 3).last.to_i %>
+#   <% n_cpu = n_cpu * context.preset_multiplier.to_i %>
+# <% else %>
+#   <% n_cpu = context.n_cpu.to_i %>
+# <% end %>
 
 # <% if use_gpu %>
 CONTAINER="$GPU_CONTAINER"
@@ -16,6 +22,7 @@ APPTAINER_FLAGS=()
 
 # shellcheck disable=SC2154
 ARGS=(
+    --threads "<%= n_cpu %>"
     --offline
     --port "$port"
     --api-key "$password"
