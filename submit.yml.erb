@@ -6,7 +6,7 @@ batch_connect:
 script:
   wall_time: <%= num_hours.to_i * 3600 %>
   # <% if use_preset == "1" %>
-  #   <% constraint, ram, n_cpu = resource_preset.split("-", 3) %>
+  #   <% constraint, ram, n_cpu = resource_preset.split("/", 3) %>
   #   <% ram = "#{ram.to_i * preset_multiplier.to_i}g" %>
   #   <% n_cpu = (n_cpu.to_i * preset_multiplier.to_i) %>
   #   <% n_gpu = preset_multiplier %>
@@ -42,5 +42,5 @@ script:
     - "--gres=gpu:<%= n_gpu %>"
     # <% end %>
     # <% if constraint.present? %>
-    - '--constraint="<%= constraint %>"'
+    - "--constraint=\"<%= constraint %>\""
     # <% end %>
