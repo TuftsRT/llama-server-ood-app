@@ -55,6 +55,13 @@ ARGS=(
 #     <% end %>
 #   <% end %>
 # <% end %>
+# <% if context.kv_offload == "1" %>
+    --kv-offload
+# <% else %>
+    --no-kv-offload
+# <% end %>
+    --cache-type-k "<%= context.cache_type_k %>"
+    --cache-type-v "<%= context.cache_type_v %>"
     --offline
     --port "$port"
     --api-key "$password"

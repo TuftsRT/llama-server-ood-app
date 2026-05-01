@@ -39,6 +39,9 @@ form:
   - "yarn_attn_factor"
   - "yarn_beta_slow"
   - "yarn_beta_fast"
+  - "kv_offload"
+  - "cache_type_k"
+  - "cache_type_v"
 
 attributes:
   num_hours:
@@ -666,3 +669,23 @@ attributes:
     label: "YaRN Low Correction Dimension (Beta)"
     min: 0
     step: 0.01
+
+  kv_offload:
+    widget: "check_box"
+    label: "Enable KV Cache Offloading"
+    value: "1"
+
+  # <% cache_type_options = ["f32", "f16", "bf16", "q8_0", "q4_0", "q4_1", "iq4_nl", "q5_0", "q5_1"] %>
+  # <% cache_type_default = "f16" %>
+
+  cache_type_k:
+    widget: "select"
+    label: "KV Cache Data Type for Keys"
+    value: "<%= cache_type_default %>"
+    options: <%= JSON.generate(cache_type_options) %>
+
+  cache_type_v:
+    widget: "select"
+    label: "KV Cache Data Type for Values"
+    value: "<%= cache_type_default %>"
+    options: <%= JSON.generate(cache_type_options) %>
