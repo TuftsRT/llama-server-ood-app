@@ -62,6 +62,8 @@ ARGS=(
 # <% end %>
     --cache-type-k "<%= context.cache_type_k %>"
     --cache-type-v "<%= context.cache_type_v %>"
+# <% gpu_layers = context.gpu_layers == "manual" ? context.n_gpu_layers : context.gpu_layers %>
+    --gpu-layers "<%= gpu_layers %>"
     --offline
     --port "$port"
     --api-key "$password"

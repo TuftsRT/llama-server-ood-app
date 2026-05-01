@@ -42,6 +42,8 @@ form:
   - "kv_offload"
   - "cache_type_k"
   - "cache_type_v"
+  - "gpu_layers"
+  - "n_gpu_layers"
 
 attributes:
   num_hours:
@@ -689,3 +691,20 @@ attributes:
     label: "KV Cache Data Type for Values"
     value: "<%= cache_type_default %>"
     options: <%= JSON.generate(cache_type_options) %>
+
+  gpu_layers:
+    widget: "select"
+    label: "GPU Offload Strategy"
+    value: "auto"
+    options:
+      - [ "Automatic", "auto", { data-hide-n-gpu-layers: true } ]
+      - [ "Offload All Layers", "all", { data-hide-n-gpu-layers: true } ]
+      - [ "Manually Specify Number Layers to Offload", "manual" ]
+
+  n_gpu_layers:
+    widget: "number_field"
+    label: "Number of Layers to Offload to GPU"
+    required: true
+    value: 0
+    min: 0
+    step: 1
