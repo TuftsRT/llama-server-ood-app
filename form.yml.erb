@@ -29,6 +29,16 @@ form:
   - "n_predict"
   - "batch_size"
   - "ubatch_size"
+  - "specify_rope"
+  - "rope_scaling"
+  - "rope_scale"
+  - "rope_freq_base"
+  - "specify_yarn"
+  - "yarn_orig_ctx"
+  - "yarn_ext_factor"
+  - "yarn_attn_factor"
+  - "yarn_beta_slow"
+  - "yarn_beta_fast"
 
 attributes:
   num_hours:
@@ -519,3 +529,140 @@ attributes:
     value: 512
     min: 1
     step: 1
+
+  specify_rope:
+    widget: "select"
+    label: "RoPE Parameters"
+    value: "0"
+    options:
+      - [
+          "Use Defaults (Recommended)",
+          "0",
+          {
+              data-hide-rope-scaling: true,
+              data-hide-rope-scale: true,
+              data-hide-rope-freq-base: true,
+              data-hide-specify-yarn: true,
+              data-hide-yarn-orig-ctx: true,
+              data-hide-yarn-ext-factor: true,
+              data-hide-yarn-attn-factor: true,
+              data-hide-yarn-beta-slow: true,
+              data-hide-yarn-beta-fast: true,
+            },
+        ]
+      - [
+          "Manually Specify (Advanced)",
+          "1",
+          {
+              data-set-rope-scaling: "none",
+              data-hide-rope-scale: true,
+              data-hide-rope-freq-base: true,
+              data-hide-specify-yarn: true,
+              data-hide-yarn-orig-ctx: true,
+              data-hide-yarn-ext-factor: true,
+              data-hide-yarn-attn-factor: true,
+              data-hide-yarn-beta-slow: true,
+              data-hide-yarn-beta-fast: true,
+            },
+        ]
+
+  rope_scaling:
+    widget: "select"
+    label: "RoPE Frequency Scaling Method"
+    value: "none"
+    options:
+      - [
+          "None",
+          "none",
+          {
+              data-hide-rope-scale: true,
+              data-hide-rope-freq-base: true,
+              data-hide-specify-yarn: true,
+              data-hide-yarn-orig-ctx: true,
+              data-hide-yarn-ext-factor: true,
+              data-hide-yarn-attn-factor: true,
+              data-hide-yarn-beta-slow: true,
+              data-hide-yarn-beta-fast: true,
+            },
+        ]
+      - [
+          "Linear",
+          "linear",
+          {
+              data-hide-specify-yarn: true,
+              data-hide-yarn-orig-ctx: true,
+              data-hide-yarn-ext-factor: true,
+              data-hide-yarn-attn-factor: true,
+              data-hide-yarn-beta-slow: true,
+              data-hide-yarn-beta-fast: true,
+            },
+        ]
+      - [
+          "YaRN",
+          "yarn",
+          {
+              data-hide-yarn-orig-ctx: true,
+              data-hide-yarn-ext-factor: true,
+              data-hide-yarn-attn-factor: true,
+              data-hide-yarn-beta-slow: true,
+              data-hide-yarn-beta-fast: true,
+              data-set-specify-yarn: "0",
+            },
+        ]
+
+  rope_scale:
+    widget: "number_field"
+    label: "RoPE Context Scaling Factor"
+    min: 1
+    step: 0.01
+
+  rope_freq_base:
+    widget: "number_field"
+    label: "RoPE Base Frequency"
+    min: 1
+    step: 1
+
+  specify_yarn:
+    widget: "check_box"
+    label: "Specify YaRN Parameters"
+    value: "0"
+    data-hide-yarn-orig-ctx-when-unchecked: true
+    data-hide-yarn-ext-factor-when-unchecked: true
+    data-hide-yarn-attn-factor-when-unchecked: true
+    data-hide-yarn-beta-slow-when-unchecked: true
+    data-hide-yarn-beta-fast-when-unchecked: true
+
+  yarn_orig_ctx:
+    widget: "number_field"
+    label: "YaRN Original Context Size"
+    help: "Set to `0` to use model training context size."
+    value: 0
+    min: 0
+    step: 1
+
+  yarn_ext_factor:
+    widget: "number_field"
+    label: "YaRN Extrapolation Mix Factor"
+    help: |
+      Must be between `0` (full interpolation) and `1` (full extrapolation).
+    min: 0
+    step: 0.01
+    max: 1
+
+  yarn_attn_factor:
+    widget: "number_field"
+    label: "YaRN Scale Attention Magnitude"
+    min: 0
+    step: 0.01
+
+  yarn_beta_slow:
+    widget: "number_field"
+    label: "YaRN High Correction Dimension (Alpha)"
+    min: 0
+    step: 0.01
+
+  yarn_beta_fast:
+    widget: "number_field"
+    label: "YaRN Low Correction Dimension (Beta)"
+    min: 0
+    step: 0.01

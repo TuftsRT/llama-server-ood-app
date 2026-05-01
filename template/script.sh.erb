@@ -27,6 +27,34 @@ ARGS=(
     --n-predict "<%= context.n_predict %>"
     --batch-size "<%= context.batch_size %>"
     --ubatch-size "<%= context.ubatch_size %>"
+# <% if context.specify_rope == "1" %>
+    --rope-scaling "<%= context.rope_scaling %>"
+#   <% if context.rope_scaling != "none" %>
+#     <% if context.rope_scale.present? %>
+    --rope-scale "<%= context.rope_scale %>"
+#     <% end %>
+#     <% if context.rope_freq_base.present? %>
+    --rope-freq-base "<%= context.rope_freq_base %>"
+#     <% end %>
+#     <% if context.rope_scaling == "yarn" && context.specify_yarn == "1" %>
+#       <% if context.yarn_orig_ctx.present? %>
+    --yarn-orig-ctx "<%= context.yarn_orig_ctx %>"
+#       <% end %>
+#       <% if context.yarn_ext_factor.present? %>
+    --yarn-ext-factor "<%= context.yarn_ext_factor %>"
+#       <% end %>
+#       <% if context.yarn_attn_factor.present? %>
+    --yarn-attn-factor "<%= context.yarn_attn_factor %>"
+#       <% end %>
+#       <% if context.yarn_beta_slow.present? %>
+    --yarn-beta-slow "<%= context.yarn_beta_slow %>"
+#       <% end %>
+#       <% if context.yarn_beta_fast.present? %>
+    --yarn-beta-fast "<%= context.yarn_beta_fast %>"
+#       <% end %>
+#     <% end %>
+#   <% end %>
+# <% end %>
     --offline
     --port "$port"
     --api-key "$password"
