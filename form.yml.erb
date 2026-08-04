@@ -274,6 +274,7 @@ attributes:
   # <% load File.join(__dir__, "lib/model_discovery.rb") %>
   # <% models_dir = "/cluster/tufts/datasets/ai/models/gguf" %>
   # <% models = discover_models(models_dir) %>
+  # <% default_model = models.find_by_label("Qwen3.6-27B-UD-Q8_K_XL") %>
 
   use_router:
     widget: "select"
@@ -295,9 +296,9 @@ attributes:
             data-hide-models-dir: true,
             data-hide-models-ini: true,
             data-hide-use-custom-model: true,
-            data-set-mmproj-file: "<%= models.first_mmproj_path %>",
-            data-set-model-file: "<%= models.first_model_path %>",
-            data-set-model-selection: "<%= models.first_model_path %>",
+            data-set-mmproj-file: "<%= default_model[:mmproj_path] %>",
+            data-set-model-file: "<%= default_model[:model_path] %>",
+            data-set-model-selection: "<%= default_model[:model_path] %>",
           },
         ]
       - [
@@ -395,9 +396,9 @@ attributes:
           {
             data-hide-mmproj-file: true,
             data-hide-model-file: true,
-            data-set-mmproj-file: "<%= models.first_mmproj_path %>",
-            data-set-model-file: "<%= models.first_model_path %>",
-            data-set-model-selection: "<%= models.first_model_path %>",
+            data-set-mmproj-file: "<%= default_model[:mmproj_path] %>",
+            data-set-model-file: "<%= default_model[:model_path] %>",
+            data-set-model-selection: "<%= default_model[:model_path] %>",
           },
         ]
       - [
@@ -413,7 +414,7 @@ attributes:
   model_selection:
     widget: "select"
     label: "Pre-Downloaded Model"
-    value: "<%= models.first_model_path %>"
+    value: "<%= default_model[:model_path] %>"
     options: <%= JSON.generate(models.options) %>
 
   model_file:
@@ -430,7 +431,7 @@ attributes:
         <li><code>/cluster/home/<%= ENV['USER'] %>/.../&lt;model&gt;[-00001-of-?????].gguf</code></li>
         <li><code>/cluster/tufts/&lt;project&gt;/.../&lt;model&gt;[-00001-of-?????].gguf</code></li>
       </ul>
-    value: "<%= models.first_model_path %>"
+    value: "<%= default_model[:model_path] %>"
     pattern: |-
       ^/(cluster/(tufts|home)/[A-Za-z0-9_\-\.]+(/[A-Za-z0-9_\-\.]+)*)\.gguf$
 
@@ -447,7 +448,7 @@ attributes:
         <li><code>/cluster/home/<%= ENV['USER'] %>/.../mmproj-&lt;dtype&gt;.gguf</code></li>
         <li><code>/cluster/tufts/&lt;project&gt;/.../mmproj-&lt;dtype&gt;.gguf</code></li>
       </ul>
-    value: "<%= models.first_mmproj_path %>"
+    value: "<%= default_model[:mmproj_path] %>"
     pattern: |-
       ^/(cluster/(tufts|home))(?:/[A-Za-z0-9_\-\.]+)*/mmproj-[A-Za-z0-9_-]+\.gguf$
 
