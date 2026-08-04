@@ -9,7 +9,7 @@ GPU_CONTAINER="$CONTAINER_DIR/llama-server-gpu.sif"
 #   <% n_cpu = context.resource_preset.split("/", 3).last.to_i %>
 #   <% n_cpu = n_cpu * context.preset_multiplier.to_i %>
 # <% else %>
-#   <% n_cpu = context.n_cpu.to_i %>
+#   <% n_cpu = context.num_cores.to_i %>
 # <% end %>
 
 # <% if use_gpu %>
