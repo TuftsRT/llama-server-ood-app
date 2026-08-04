@@ -74,28 +74,28 @@ attributes:
           "Use Resource Presets (Recommended)",
           "1",
           {
-              data-hide-allow-preempt: true,
-              data-hide-exact-vram: true,
-              data-hide-gpu-model: true,
-              data-hide-gpu-preference: true,
-              data-hide-memory-ram: true,
-              data-hide-min-vram: true,
-              data-hide-num-cores: true,
-              data-hide-num-gpu: true,
-            },
+            data-hide-allow-preempt: true,
+            data-hide-exact-vram: true,
+            data-hide-gpu-model: true,
+            data-hide-gpu-preference: true,
+            data-hide-memory-ram: true,
+            data-hide-min-vram: true,
+            data-hide-num-cores: true,
+            data-hide-num-gpu: true,
+          },
         ]
       - [
           "Manually Specify Configuration (Advanced)",
           "0",
           {
-              data-hide-exact-vram: true,
-              data-hide-gpu-model: true,
-              data-hide-min-vram: true,
-              data-hide-num-gpu: true,
-              data-hide-preset-multiplier: true,
-              data-hide-resource-preset: true,
-              data-set-gpu-preference: "none",
-            },
+            data-hide-exact-vram: true,
+            data-hide-gpu-model: true,
+            data-hide-min-vram: true,
+            data-hide-num-gpu: true,
+            data-hide-preset-multiplier: true,
+            data-hide-resource-preset: true,
+            data-set-gpu-preference: "none",
+          },
         ]
 
   resource_preset:
@@ -175,19 +175,19 @@ attributes:
       into VRAM. Higher values increase performance but might delay job start.
     value: "8g"
     options:
-      - [ "8 GB", "8g" ]
-      - [ "16 GB", "16g" ]
-      - [ "32 GB", "32g" ]
-      - [ "64 GB", "64g" ]
-      - [ "96 GB", "96g" ]
-      - [ "128 GB", "128g" ]
-      - [ "192 GB", "192g" ]
-      - [ "256 GB", "256g" ]
-      - [ "384 GB", "384g" ]
-      - [ "512 GB", "512g" ]
-      - [ "768 GB", "768g" ]
-      - [ "1024 GB", "1024g" ]
-      - [ "1536 GB", "1536g" ]
+      - ["8 GB", "8g"]
+      - ["16 GB", "16g"]
+      - ["32 GB", "32g"]
+      - ["64 GB", "64g"]
+      - ["96 GB", "96g"]
+      - ["128 GB", "128g"]
+      - ["192 GB", "192g"]
+      - ["256 GB", "256g"]
+      - ["384 GB", "384g"]
+      - ["512 GB", "512g"]
+      - ["768 GB", "768g"]
+      - ["1024 GB", "1024g"]
+      - ["1536 GB", "1536g"]
 
   gpu_preference:
     widget: "select"
@@ -203,20 +203,20 @@ attributes:
           "No GPU (No VRAM)",
           "none",
           {
-              data-hide-exact-vram: true,
-              data-hide-gpu-model: true,
-              data-hide-min-vram: true,
-              data-hide-num-gpu: true,
-            },
+            data-hide-exact-vram: true,
+            data-hide-gpu-model: true,
+            data-hide-min-vram: true,
+            data-hide-num-gpu: true,
+          },
         ]
       - [
           "Any GPU (≥ 16 GB VRAM)",
           "any",
           {
-              data-hide-exact-vram: true,
-              data-hide-gpu-model: true,
-              data-hide-min-vram: true,
-            },
+            data-hide-exact-vram: true,
+            data-hide-gpu-model: true,
+            data-hide-min-vram: true,
+          },
         ]
       - [
           "Minimum VRAM Requirement",
@@ -307,30 +307,30 @@ attributes:
           "Router (Multi-Model)",
           "1",
           {
-              data-hide-mmproj-file: true,
-              data-hide-model-file: true,
-              data-hide-model-selection: true,
-              data-hide-models-dir: true,
-              data-hide-models-ini: true,
-              data-hide-use-custom-model: true,
-              data-set-mmproj-file: "<%= models.first_mmproj_path %>",
-              data-set-model-file: "<%= models.first_model_path %>",
-              data-set-model-selection: "<%= models.first_model_path %>",
-            },
+            data-hide-mmproj-file: true,
+            data-hide-model-file: true,
+            data-hide-model-selection: true,
+            data-hide-models-dir: true,
+            data-hide-models-ini: true,
+            data-hide-use-custom-model: true,
+            data-set-mmproj-file: "<%= models.first_mmproj_path %>",
+            data-set-model-file: "<%= models.first_model_path %>",
+            data-set-model-selection: "<%= models.first_model_path %>",
+          },
         ]
       - [
           "Classic (Single-Model)",
           "0",
           {
-              data-hide-mmproj-file: true,
-              data-hide-model-file: true,
-              data-hide-models-dir: true,
-              data-hide-models-ini: true,
-              data-hide-use-default-models: true,
-              data-set-models-dir: "<%= models_dir %>",
-              data-set-use-custom-model: "0",
-              data-set-use-default-models: "1",
-            },
+            data-hide-mmproj-file: true,
+            data-hide-model-file: true,
+            data-hide-models-dir: true,
+            data-hide-models-ini: true,
+            data-hide-use-default-models: true,
+            data-set-models-dir: "<%= models_dir %>",
+            data-set-use-custom-model: "0",
+            data-set-use-default-models: "1",
+          },
         ]
 
   use_default_models:
@@ -344,11 +344,11 @@ attributes:
           "Default (Recommended)",
           "1",
           {
-              data-hide-models-dir: true,
-              data-hide-models-ini: true,
-              data-set-models-dir: "<%= models_dir %>",
-              data-set-models-ini: "",
-            },
+            data-hide-models-dir: true,
+            data-hide-models-ini: true,
+            data-set-models-dir: "<%= models_dir %>",
+            data-set-models-ini: "",
+          },
         ]
       - [
           "Custom (Advanced)",
@@ -411,21 +411,21 @@ attributes:
           "Select Pre-Downloaded Model (Recommended)",
           "0",
           {
-              data-hide-mmproj-file: true,
-              data-hide-model-file: true,
-              data-set-mmproj-file: "<%= models.first_mmproj_path %>",
-              data-set-model-file: "<%= models.first_model_path %>",
-              data-set-model-selection: "<%= models.first_model_path %>",
-            },
+            data-hide-mmproj-file: true,
+            data-hide-model-file: true,
+            data-set-mmproj-file: "<%= models.first_mmproj_path %>",
+            data-set-model-file: "<%= models.first_model_path %>",
+            data-set-model-selection: "<%= models.first_model_path %>",
+          },
         ]
       - [
           "Manually Specify Custom Model File (Advanced)",
           "1",
           {
-              data-hide-model-selection: true,
-              data-set-mmproj-file: "",
-              data-set-model-file: "",
-            },
+            data-hide-model-selection: true,
+            data-set-mmproj-file: "",
+            data-set-model-file: "",
+          },
         ]
 
   model_selection:
@@ -485,7 +485,7 @@ attributes:
           "1",
           { data-hide-api-key: true, data-set-api-key: "<%= api_key %>" },
         ]
-      - [ "Manually Specify API Key (Advanced)", "0", { data-set-api-key: "" } ]
+      - ["Manually Specify API Key (Advanced)", "0", { data-set-api-key: "" }]
 
   api_key:
     widget: "text_field"
@@ -544,31 +544,31 @@ attributes:
           "Use Defaults (Recommended)",
           "0",
           {
-              data-hide-rope-scaling: true,
-              data-hide-rope-scale: true,
-              data-hide-rope-freq-base: true,
-              data-hide-specify-yarn: true,
-              data-hide-yarn-orig-ctx: true,
-              data-hide-yarn-ext-factor: true,
-              data-hide-yarn-attn-factor: true,
-              data-hide-yarn-beta-slow: true,
-              data-hide-yarn-beta-fast: true,
-            },
+            data-hide-rope-scaling: true,
+            data-hide-rope-scale: true,
+            data-hide-rope-freq-base: true,
+            data-hide-specify-yarn: true,
+            data-hide-yarn-orig-ctx: true,
+            data-hide-yarn-ext-factor: true,
+            data-hide-yarn-attn-factor: true,
+            data-hide-yarn-beta-slow: true,
+            data-hide-yarn-beta-fast: true,
+          },
         ]
       - [
           "Manually Specify (Advanced)",
           "1",
           {
-              data-set-rope-scaling: "none",
-              data-hide-rope-scale: true,
-              data-hide-rope-freq-base: true,
-              data-hide-specify-yarn: true,
-              data-hide-yarn-orig-ctx: true,
-              data-hide-yarn-ext-factor: true,
-              data-hide-yarn-attn-factor: true,
-              data-hide-yarn-beta-slow: true,
-              data-hide-yarn-beta-fast: true,
-            },
+            data-set-rope-scaling: "none",
+            data-hide-rope-scale: true,
+            data-hide-rope-freq-base: true,
+            data-hide-specify-yarn: true,
+            data-hide-yarn-orig-ctx: true,
+            data-hide-yarn-ext-factor: true,
+            data-hide-yarn-attn-factor: true,
+            data-hide-yarn-beta-slow: true,
+            data-hide-yarn-beta-fast: true,
+          },
         ]
 
   rope_scaling:
@@ -580,39 +580,39 @@ attributes:
           "None",
           "none",
           {
-              data-hide-rope-scale: true,
-              data-hide-rope-freq-base: true,
-              data-hide-specify-yarn: true,
-              data-hide-yarn-orig-ctx: true,
-              data-hide-yarn-ext-factor: true,
-              data-hide-yarn-attn-factor: true,
-              data-hide-yarn-beta-slow: true,
-              data-hide-yarn-beta-fast: true,
-            },
+            data-hide-rope-scale: true,
+            data-hide-rope-freq-base: true,
+            data-hide-specify-yarn: true,
+            data-hide-yarn-orig-ctx: true,
+            data-hide-yarn-ext-factor: true,
+            data-hide-yarn-attn-factor: true,
+            data-hide-yarn-beta-slow: true,
+            data-hide-yarn-beta-fast: true,
+          },
         ]
       - [
           "Linear",
           "linear",
           {
-              data-hide-specify-yarn: true,
-              data-hide-yarn-orig-ctx: true,
-              data-hide-yarn-ext-factor: true,
-              data-hide-yarn-attn-factor: true,
-              data-hide-yarn-beta-slow: true,
-              data-hide-yarn-beta-fast: true,
-            },
+            data-hide-specify-yarn: true,
+            data-hide-yarn-orig-ctx: true,
+            data-hide-yarn-ext-factor: true,
+            data-hide-yarn-attn-factor: true,
+            data-hide-yarn-beta-slow: true,
+            data-hide-yarn-beta-fast: true,
+          },
         ]
       - [
           "YaRN",
           "yarn",
           {
-              data-hide-yarn-orig-ctx: true,
-              data-hide-yarn-ext-factor: true,
-              data-hide-yarn-attn-factor: true,
-              data-hide-yarn-beta-slow: true,
-              data-hide-yarn-beta-fast: true,
-              data-set-specify-yarn: "0",
-            },
+            data-hide-yarn-orig-ctx: true,
+            data-hide-yarn-ext-factor: true,
+            data-hide-yarn-attn-factor: true,
+            data-hide-yarn-beta-slow: true,
+            data-hide-yarn-beta-fast: true,
+            data-set-specify-yarn: "0",
+          },
         ]
 
   rope_scale:
@@ -697,9 +697,9 @@ attributes:
     label: "GPU Offload Strategy"
     value: "auto"
     options:
-      - [ "Automatic", "auto", { data-hide-n-gpu-layers: true } ]
-      - [ "Offload All Layers", "all", { data-hide-n-gpu-layers: true } ]
-      - [ "Manually Specify Number Layers to Offload", "manual" ]
+      - ["Automatic", "auto", { data-hide-n-gpu-layers: true }]
+      - ["Offload All Layers", "all", { data-hide-n-gpu-layers: true }]
+      - ["Manually Specify Number Layers to Offload", "manual"]
 
   n_gpu_layers:
     widget: "number_field"
