@@ -25,6 +25,7 @@ form:
   - "mmproj_file"
   - "use_random_key"
   - "api_key"
+  - "show_advanced"
   - "ctx_size"
   - "n_predict"
   - "batch_size"
@@ -498,6 +499,53 @@ attributes:
       access the server along with any data sent to it.**
     value: "<%= api_key %>"
     pattern: "^[a-zA-Z0-9]{<%= key_len %>,}$"
+
+  show_advanced:
+    widget: "select"
+    label: "Advanced Parameters"
+    value: "0"
+    options:
+      - [
+          "Use Defaults (Recommended)",
+          "0",
+          {
+            data-hide-ctx-size: true,
+            data-hide-n-predict: true,
+            data-hide-batch-size: true,
+            data-hide-ubatch-size: true,
+            data-hide-specify-rope: true,
+            data-hide-rope-scaling: true,
+            data-hide-rope-scale: true,
+            data-hide-rope-freq-base: true,
+            data-hide-specify-yarn: true,
+            data-hide-yarn-orig-ctx: true,
+            data-hide-yarn-ext-factor: true,
+            data-hide-yarn-attn-factor: true,
+            data-hide-yarn-beta-slow: true,
+            data-hide-yarn-beta-fast: true,
+            data-hide-kv-offload: true,
+            data-hide-cache-type-k: true,
+            data-hide-cache-type-v: true,
+            data-hide-gpu-layers: true,
+            data-hide-n-gpu-layers: true,
+          },
+        ]
+      - [
+          "Manually Specify (Advanced)",
+          "1",
+          {
+            data-set-specify-rope: "0",
+            data-hide-rope-scaling: true,
+            data-hide-rope-scale: true,
+            data-hide-rope-freq-base: true,
+            data-hide-specify-yarn: true,
+            data-hide-yarn-orig-ctx: true,
+            data-hide-yarn-ext-factor: true,
+            data-hide-yarn-attn-factor: true,
+            data-hide-yarn-beta-slow: true,
+            data-hide-yarn-beta-fast: true,
+          },
+        ]
 
   ctx_size:
     widget: "number_field"
