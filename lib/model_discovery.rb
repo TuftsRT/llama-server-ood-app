@@ -18,12 +18,8 @@ class ModelDiscovery # rubocop:disable Style/Documentation
     end
   end
 
-  def first_model_path
-    @entries.first&.fetch(:model_path, '')
-  end
-
-  def first_mmproj_path
-    @entries.first&.fetch(:mmproj_path, '')
+  def find_by_label(label)
+    @entries.find { |m| m[:label] == label } || { model_path: '', mmproj_path: '' }
   end
 end
 
