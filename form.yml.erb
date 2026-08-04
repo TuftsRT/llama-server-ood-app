@@ -1,4 +1,5 @@
 # <% require "json" %>
+# <% require "securerandom" %>
 ---
 cluster: "pax"
 
@@ -451,7 +452,7 @@ attributes:
       ^/(cluster/(tufts|home))(?:/[A-Za-z0-9_\-\.]+)*/mmproj-[A-Za-z0-9_-]+\.gguf$
 
   # <% key_len = 32 %>
-  # <% api_key = Array.new(key_len){[*'0'..'9', *'A'..'Z', *'a'..'z'].sample}.join %>
+  # <% api_key = SecureRandom.alphanumeric(key_len) %>
 
   use_random_key:
     widget: "select"

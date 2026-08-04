@@ -8,6 +8,7 @@
     "mmproj",
     "ntasks",
     "rnode",
+    "securerandom",
     "webui"
   ]
 }
