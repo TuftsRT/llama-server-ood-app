@@ -46,6 +46,7 @@ attributes:
   use_preset:
     widget: "select"
     label: "Resource Preference"
+    cacheable: false
     help: |
       Ensure the selected configuration is possible if not using presets.
       Consult the [system status dashboard](/pun/sys/dashboard/system-status)
@@ -323,6 +324,7 @@ attributes:
   use_default_models:
     widget: "select"
     label: "Model Set"
+    cacheable: false
     value: "1"
     help: |
       The default set contains a curated selection of pre-downloaded models.
@@ -346,6 +348,7 @@ attributes:
   models_dir:
     widget: "text_field"
     label: "Models Directory"
+    cacheable: false
     help: |
       <p style="margin-bottom: 0">
         Path to a directory containing model files in GGUF format. Refer to the
@@ -369,6 +372,7 @@ attributes:
   models_ini:
     widget: "text_field"
     label: "Model Presets File"
+    cacheable: false
     help: |
       <p style="margin-bottom: 0">
         Path to an INI file defining model presets. Refer to the
@@ -392,6 +396,7 @@ attributes:
   use_custom_model:
     widget: "select"
     label: "Model Preference"
+    cacheable: false
     value: "0"
     options:
       - [
@@ -418,12 +423,14 @@ attributes:
   model_selection:
     widget: "select"
     label: "Pre-Downloaded Model"
+    cacheable: false
     value: "<%= default_model[:model_path] %>"
     options: <%= JSON.generate(models.options) %>
 
   model_file:
     widget: "text_field"
     label: "Model File"
+    cacheable: false
     required: true
     help: |
       <p style="margin-bottom: 0">
@@ -442,6 +449,7 @@ attributes:
   mmproj_file:
     widget: "text_field"
     label: "Multi-Modal Projector"
+    cacheable: false
     help: |
       <p style="margin-bottom: 0;">
         Path to a multi-modal projector (MMProj) file in GGUF format.
