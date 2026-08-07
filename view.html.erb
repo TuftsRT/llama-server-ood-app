@@ -3,8 +3,8 @@
     <span class="input-group-text" style="width: 6em"
       ><strong> Base URL </strong></span
     >
-    <span id="base-url" class="form-control"
-      ><code id="base-url">
+    <span class="form-control"
+      ><code data-id="base-url">
         http://<%= host %>.pax.tufts.edu:<%= port %>
       </code></span
     >
@@ -21,8 +21,8 @@
     <span class="input-group-text" style="width: 6em"
       ><strong> API Key </strong></span
     >
-    <span id="api-key" class="form-control"
-      ><code id="api-key"> <%= password %></code>
+    <span class="form-control"
+      ><code data-id="api-key"> <%= password %></code>
     </span>
     <button
       class="btn btn-light far fa-copy copy-btn"
@@ -40,11 +40,7 @@
 <!-- blank lines prevent redcarpet from rendering the following as markdown -->
 
 <div class="d-flex gap-2">
-  <a
-    href="/rnode/<%= host %>/<%= port %>/"
-    class="btn btn-primary"
-    id="launch-button"
-  >
+  <a href="/rnode/<%= host %>/<%= port %>/" class="btn btn-primary launch-btn">
     <i class="fa fa-eye" aria-hidden="true"></i> Launch Web UI
   </a>
   <a
@@ -56,25 +52,28 @@
 </div>
 
 <script>
-  document
-    .getElementById("launch-button")
-    .addEventListener("mouseover", function () {
-      localStorage.setItem(
-        "LlamaCppWebui.config",
-        '{"apiKey":"<%= password %>"}',
-      );
+  (() => {
+    const scope = document.currentScript.parentElement;
+    scope
+      .querySelector(".launch-btn")
+      .addEventListener("mouseover", function () {
+        localStorage.setItem(
+          "LlamaCppWebui.config",
+          '{"apiKey":"<%= password %>"}',
+        );
+      });
+    scope.querySelectorAll(".copy-btn").forEach((btn) => {
+      btn.addEventListener("click", function () {
+        const targetId = btn.getAttribute("data-target");
+        const code = scope.querySelector(`[data-id="${targetId}"]`).innerText;
+        navigator.clipboard.writeText(code);
+        btn.classList.remove("fa-copy");
+        btn.classList.add("fa-check-square");
+        setTimeout(() => {
+          btn.classList.remove("fa-check-square");
+          btn.classList.add("fa-copy");
+        }, 1500);
+      });
     });
-  document.querySelectorAll(".copy-btn").forEach((btn) => {
-    btn.addEventListener("click", function () {
-      const targetId = btn.getAttribute("data-target");
-      const code = document.getElementById(targetId).innerText;
-      navigator.clipboard.writeText(code);
-      btn.classList.remove("fa-copy");
-      btn.classList.add("fa-check-square");
-      setTimeout(() => {
-        btn.classList.remove("fa-check-square");
-        btn.classList.add("fa-copy");
-      }, 1500);
-    });
-  });
+  })();
 </script>
