@@ -279,13 +279,28 @@ attributes:
   use_router:
     widget: "select"
     label: "Server Mode"
-    value: "1"
+    value: "0"
     help: |
       Router mode is *experimental* and allows for the dynamic loading and
       unloading of multiple models from a specified directory. Classic mode
       preloads a single specified model that cannot be changed without
       cancelling the job and submitting a new one.
     options:
+      - [
+          "Classic (Single-Model)",
+          "0",
+          {
+            data-hide-mmproj-file: true,
+            data-hide-model-file: true,
+            data-hide-models-dir: true,
+            data-hide-models-ini: true,
+            data-hide-use-default-models: true,
+            data-set-models-dir: "<%= models_dir %>",
+            data-set-models-ini: "",
+            data-set-use-custom-model: "0",
+            data-set-use-default-models: "1",
+          },
+        ]
       - [
           "Router (Multi-Model)",
           "1",
@@ -299,19 +314,8 @@ attributes:
             data-set-mmproj-file: "<%= default_model[:mmproj_path] %>",
             data-set-model-file: "<%= default_model[:model_path] %>",
             data-set-model-selection: "<%= default_model[:model_path] %>",
-          },
-        ]
-      - [
-          "Classic (Single-Model)",
-          "0",
-          {
-            data-hide-mmproj-file: true,
-            data-hide-model-file: true,
-            data-hide-models-dir: true,
-            data-hide-models-ini: true,
-            data-hide-use-default-models: true,
             data-set-models-dir: "<%= models_dir %>",
-            data-set-use-custom-model: "0",
+            data-set-models-ini: "",
             data-set-use-default-models: "1",
           },
         ]
