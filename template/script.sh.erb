@@ -32,6 +32,9 @@ ARGS=(
     --mmproj "<%= context.mmproj_file %>"
 #   <% end %>
 # <% elsif context.use_router == "1" %>
+#   <% if context.models_dir.blank? && context.models_ini.blank? %>
+#     <% raise "At least one of \"Models Directory\" or \"Model Presets File\" must be specified." %>
+#   <% end %>
 #   <% if context.models_dir.present? %>
     --models-dir "<%= context.models_dir %>"
 #   <% end %>
