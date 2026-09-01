@@ -25,7 +25,6 @@ ARGS=(
     --threads "<%= n_cpu %>"
     --offline
     --port "$port"
-    --api-key "$password"
 # <% if context.use_router == "0" %>
     --model "<%= context.model_file %>"
 #   <% if context.mmproj_file.present? %>
@@ -46,5 +45,8 @@ ARGS=(
 
 module purge
 module load apptainer
+
+# shellcheck disable=SC2154
+export LLAMA_API_KEY="$password"
 
 apptainer run "${APPTAINER_FLAGS[@]}" "$CONTAINER" "${ARGS[@]}"
