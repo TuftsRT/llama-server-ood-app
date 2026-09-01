@@ -59,14 +59,15 @@
 <script>
   (() => {
     const scope = document.currentScript.parentElement;
-    scope
-      .querySelector(".launch-btn")
-      .addEventListener("mouseover", function () {
-        localStorage.setItem(
-          "LlamaCppWebui.config",
-          '{"apiKey":"<%= password %>"}',
-        );
-      });
+    const launchBtn = scope.querySelector(".launch-btn");
+    const storeApiKey = function () {
+      localStorage.setItem(
+        "LlamaCppWebui.config",
+        '{"apiKey":"<%= password %>"}',
+      );
+    };
+    launchBtn.addEventListener("mouseover", storeApiKey);
+    launchBtn.addEventListener("touchstart", storeApiKey);
     scope.querySelectorAll(".copy-btn").forEach((btn) => {
       btn.addEventListener("click", function () {
         const targetId = btn.getAttribute("data-target");
