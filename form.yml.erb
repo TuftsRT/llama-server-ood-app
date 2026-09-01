@@ -131,7 +131,7 @@ attributes:
     cacheable: false
     required: true
     help: |
-      Multiplies the resources of the selected preset by the this value.
+      Multiplies the resources of the selected preset by this value.
       For example, the preset "A100 GPU / 40 GB VRAM / 128 GB RAM / 8 CPU"
       with a multiplier of two (2) results in two A100 GPUs, 80 GB VRAM,
       256 GB RAM, and 16 CPU cores. The maximum allowed multiplier is four (4)
@@ -265,9 +265,9 @@ attributes:
     cacheable: false
     required: true
     help: |
-      Number of multiples of the selected GPU to use. Total VRAM equals the
-      selected VRAM multiplied by this number. Higher values might delay job
-      start. Up to 8 GPUs possible.
+      Number of the selected GPU to request. Total VRAM equals the selected
+      VRAM multiplied by this number. Higher values might delay job start.
+      Up to 8 GPUs possible.
     value: 1
     min: 1
     max: 8
