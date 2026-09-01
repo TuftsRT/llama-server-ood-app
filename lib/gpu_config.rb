@@ -8,6 +8,7 @@ end
 
 GPU_LIST = [
   Gpu.new('p100', 'P100', 16),
+  Gpu.new('t4', 'T4', 16),
   Gpu.new('rtx_6000', 'RTX 6000', 24),
   Gpu.new('rtx_a5000', 'RTX A5000', 24),
   Gpu.new('v100', 'V100', 32),
