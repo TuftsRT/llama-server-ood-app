@@ -362,7 +362,9 @@ attributes:
     help: |
       <p style="margin-bottom: 0">
         Path to a directory containing model files in GGUF format. Refer to the
-        <a href="https://github.com/ggml-org/llama.cpp/tree/master/tools/server#model-sources">
+        <a
+          href="https://github.com/ggml-org/llama.cpp/tree/master/tools/server#model-sources"
+        >
           LLaMA CPP Server documentation
         </a>
         for the expected directory structure and file naming conventions.
@@ -386,7 +388,9 @@ attributes:
     help: |
       <p style="margin-bottom: 0">
         Path to an INI file defining model presets. Refer to the
-        <a href="https://github.com/ggml-org/llama.cpp/tree/master/tools/server#model-presets">
+        <a
+          href="https://github.com/ggml-org/llama.cpp/tree/master/tools/server#model-presets"
+        >
           LLaMA CPP Server documentation
         </a>
         for the required file structure, example content, and preset options.
@@ -449,8 +453,17 @@ attributes:
         and ensure all related files are in the same directory.
       </p>
       <ul>
-        <li><code>/cluster/home/<%= ENV['USER'] %>/.../&lt;model&gt;[-00001-of-?????].gguf</code></li>
-        <li><code>/cluster/tufts/&lt;project&gt;/.../&lt;model&gt;[-00001-of-?????].gguf</code></li>
+        <li>
+          <code
+            >/cluster/home/<%= ENV['USER']
+            %>/.../&lt;model&gt;[-00001-of-?????].gguf</code
+          >
+        </li>
+        <li>
+          <code
+            >/cluster/tufts/&lt;project&gt;/.../&lt;model&gt;[-00001-of-?????].gguf</code
+          >
+        </li>
       </ul>
     value: "<%= default_model[:model_path] %>"
     pattern: |-
@@ -461,14 +474,18 @@ attributes:
     label: "Multi-Modal Projector"
     cacheable: false
     help: |
-      <p style="margin-bottom: 0;">
+      <p style="margin-bottom: 0">
         Path to a multi-modal projector (MMProj) file in GGUF format.
         Needed for multi-modal capabilities for supported models and
         usually distributed alongside the model file(s).
       </p>
       <ul>
-        <li><code>/cluster/home/<%= ENV['USER'] %>/.../mmproj-&lt;dtype&gt;.gguf</code></li>
-        <li><code>/cluster/tufts/&lt;project&gt;/.../mmproj-&lt;dtype&gt;.gguf</code></li>
+        <li>
+          <code>/cluster/home/<%= ENV['USER'] %>/.../mmproj-&lt;dtype&gt;.gguf</code>
+        </li>
+        <li>
+          <code>/cluster/tufts/&lt;project&gt;/.../mmproj-&lt;dtype&gt;.gguf</code>
+        </li>
       </ul>
     value: "<%= default_model[:mmproj_path] %>"
     pattern: |-
