@@ -10,6 +10,7 @@
     "qwen",
     "redcarpet",
     "rnode",
+    "rstrip",
     "securerandom",
     "webui"
   ]
