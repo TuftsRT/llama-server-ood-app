@@ -8,7 +8,7 @@ class ModelDiscovery # rubocop:disable Style/Documentation
   def options
     @entries.map do |m|
       [
-        m[:label],
+        display_label(m),
         m[:model_path],
         {
           'data-set-model-file' => m[:model_path],
@@ -19,7 +19,19 @@ class ModelDiscovery # rubocop:disable Style/Documentation
   end
 
   def find_by_label(label)
-    @entries.find { |m| m[:label] == label } || { model_path: '', mmproj_path: '' }
+    @entries.find { |m| m[:label] == label } ||
+      { model_path: '', mmproj_path: '' }
+  end
+
+  private
+
+  def display_label(m)
+    return m[:label] unless m[:size_bytes]&.positive?
+    "#{m[:label]} (#{format_size(m[:size_bytes])})"
+  end
+
+  def format_size(bytes)
+    "#{(bytes.to_f / 1.gigabyte).ceil} GB"
   end
 end
 
@@ -39,7 +51,8 @@ def discover_models(base_dir) # rubocop:disable Metrics
       entries << {
         label: File.basename(entry, '.gguf'),
         model_path: full_path,
-        mmproj_path: ''
+        mmproj_path: '',
+        size_bytes: File.size(full_path)
       }
     elsif File.directory?(full_path)
       gguf_files = Dir.glob(File.join(full_path, '*.gguf')).sort
@@ -50,7 +63,8 @@ def discover_models(base_dir) # rubocop:disable Metrics
       entries << {
         label: entry,
         model_path: model_files.first,
-        mmproj_path: mmproj_files.first || ''
+        mmproj_path: mmproj_files.first || '',
+        size_bytes: gguf_files.sum { |f| File.size(f) }
       }
     end
   end
