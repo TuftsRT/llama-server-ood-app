@@ -1,4 +1,8 @@
 ---
 name: LLM Server (LLaMA CPP)
 role: batch_connect
-description: "A lightweight, [OpenAI API](https://github.com/openai/openai-openapi) compatible, HTTP server for serving LLMs."
+description: >-
+  A lightweight HTTP server for serving LLMs. Compatible with the
+  [OpenAI API](https://github.com/openai/openai-openapi) and
+  [Anthropic Messages API](https://docs.claude.com/en/api/messages).
+  Includes an optional built-in web chat interface.
