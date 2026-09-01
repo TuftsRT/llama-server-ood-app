@@ -480,7 +480,8 @@ attributes:
     label: "API Key Preference"
     cacheable: false
     help: |
-      The key will be displayed on the job information card after job start.
+      Used to authenticate server requests.
+      Will be displayed on the job information card.
     value: "1"
     options:
       - [
@@ -496,8 +497,7 @@ attributes:
     cacheable: false
     required: true
     help: |
-      Must be difficult to guess and consist of at least <%= key_len %>
-      alphanumeric `[a-zA-Z0-9]` characters. **Anyone with the API key can
-      access the server along with any data sent to it.**
+      Must be at least <%= key_len %> characters.
+      Only letters and numbers allowed. Case sensitive.
     value: "<%= api_key %>"
     pattern: "^[a-zA-Z0-9]{<%= key_len %>,}$"
