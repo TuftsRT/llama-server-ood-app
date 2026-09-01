@@ -35,6 +35,8 @@ form:
   - "use_random_key"
   - "api_key"
 
+# <% max_hours = 48 %>
+
 attributes:
   num_hours:
     widget: "number_field"
@@ -45,10 +47,10 @@ attributes:
       Upper limit for the job runtime in hours.
       Jobs exceeding this limit will be terminated.
       Higher values might delay job start.
-      Maximum allowed runtime is 48 hours.
+      Maximum allowed runtime is <%= max_hours %> hours.
     value: 1
     min: 1
-    max: 48
+    max: <%= max_hours %>
     step: 1
 
   use_preset:
