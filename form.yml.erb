@@ -43,7 +43,7 @@ attributes:
     label: "Hours"
     cacheable: false
     required: true
-    help: |
+    help: >-
       Upper limit for the job runtime in hours.
       Jobs exceeding this limit will be terminated.
       Higher values might delay job start.
@@ -57,7 +57,7 @@ attributes:
     widget: "select"
     label: "Resource Preference"
     cacheable: false
-    help: |
+    help: >-
       Ensure the selected configuration is possible if not using presets.
       Consult the [system status dashboard](/pun/sys/dashboard/system-status)
       for node configuration details and current resource availability.
@@ -95,7 +95,7 @@ attributes:
     widget: "select"
     label: "Resource Preset"
     cacheable: false
-    help: |
+    help: >-
       Choose a preset that accommodates the model you are planning on using.
       Models that can completely fit into VRAM will have optimal performance.
       Models that exceed the combined total of RAM and VRAM cannot be used.
@@ -129,7 +129,7 @@ attributes:
     label: "Preset Multiplier"
     cacheable: false
     required: true
-    help: |
+    help: >-
       Multiplies the resources of the selected preset by this value.
       For example, the preset "A100 GPU / 40 GB VRAM / 94 GB RAM / 4 CPU"
       with a multiplier of two (2) results in two A100 GPUs, 80 GB VRAM,
@@ -162,7 +162,7 @@ attributes:
     widget: "select"
     label: "Memory (RAM)"
     cacheable: false
-    help: |
+    help: >-
       RAM is used when no GPU is selected or when the whole model cannot fit
       into VRAM. Higher values increase performance but might delay job start.
     value: "8g"
@@ -185,7 +185,7 @@ attributes:
     widget: "select"
     label: "GPU Preference"
     cacheable: false
-    help: |
+    help: >-
       Not selecting a GPU decreases performance but might allow your job to
       start sooner. Optimal performance requires total VRAM that can fit the
       entire model and batch size.
@@ -232,7 +232,7 @@ attributes:
     widget: "select"
     label: "Minimum VRAM"
     cacheable: false
-    help: |
+    help: >-
       Automatically select a GPU with VRAM equaling or exceeding the
       selected option. Higher values might delay job start.
     value: "<%= min_vram_options.first.last %>"
@@ -242,7 +242,7 @@ attributes:
     widget: "select"
     label: "Exact VRAM"
     cacheable: false
-    help: |
+    help: >-
       Automatically select a GPU with exactly the selected VRAM.
       Subject to GPU availability.
     value: "<%= exact_vram_options.first.last %>"
@@ -252,7 +252,7 @@ attributes:
     widget: "select"
     label: "GPU Model (VRAM)"
     cacheable: false
-    help: |
+    help: >-
       Only use if a specific GPU model is required.
       Might delay job start due to GPU availability.
     value: "<%= gpu_model_options.first.last %>"
@@ -263,7 +263,7 @@ attributes:
     label: "Number of GPUs"
     cacheable: false
     required: true
-    help: |
+    help: >-
       Number of the selected GPU to request. Total VRAM equals the selected
       VRAM multiplied by this number. Higher values might delay job start.
       Up to 8 GPUs possible.
@@ -276,7 +276,7 @@ attributes:
     widget: "check_box"
     label: "Allow Preemption"
     cacheable: false
-    help: |
+    help: >-
       Gain access to reserved resources and potentially start the job sooner
       by allowing your job to be preempted (terminated without warning) if
       higher-priority jobs need resources.
@@ -290,7 +290,7 @@ attributes:
     widget: "select"
     label: "Server Mode"
     value: "0"
-    help: |
+    help: >-
       Router mode is *experimental* and allows for the dynamic loading and
       unloading of multiple models from a specified directory. Classic mode
       preloads a single specified model that cannot be changed without
@@ -335,7 +335,7 @@ attributes:
     label: "Model Set"
     cacheable: false
     value: "1"
-    help: |
+    help: >-
       The default set contains a curated selection of pre-downloaded models.
     options:
       - [
@@ -437,7 +437,7 @@ attributes:
     widget: "select"
     label: "Pre-Downloaded Model"
     cacheable: false
-    help: |
+    help: >-
       Selected VRAM/RAM should exceed the displayed model size by several GB.
     value: "<%= default_model[:model_path] %>"
     options: <%= JSON.generate(models.options) %>
@@ -499,7 +499,7 @@ attributes:
     widget: "select"
     label: "API Key Preference"
     cacheable: false
-    help: |
+    help: >-
       Used to authenticate server requests.
       Will be displayed on the job information card.
     value: "1"
@@ -516,7 +516,7 @@ attributes:
     label: "API Key"
     cacheable: false
     required: true
-    help: |
+    help: >-
       Must be at least <%= key_len %> characters.
       Only letters and numbers allowed. Case sensitive.
     value: "<%= api_key %>"
