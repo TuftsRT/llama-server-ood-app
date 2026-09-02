@@ -1,8 +1,8 @@
 #!/bin/bash
 
-CONTAINER_DIR="/cluster/tufts/apps/container/ai/images"
-CPU_CONTAINER="$CONTAINER_DIR/llama-server-cpu.sif"
-GPU_CONTAINER="$CONTAINER_DIR/llama-server-gpu.sif"
+CONTAINER_DIR="/cluster/tufts/apps/container/ai/images/llama-server"
+CONTAINER_NAME="llama-server-latest.sif"
+CONTAINER="$CONTAINER_DIR/$CONTAINER_NAME"
 
 # <% use_gpu = context.use_preset == "1" || context.gpu_preference != "none" %>
 # <% if context.use_preset == "1" %>
@@ -13,10 +13,8 @@ GPU_CONTAINER="$CONTAINER_DIR/llama-server-gpu.sif"
 # <% end %>
 
 # <% if use_gpu %>
-CONTAINER="$GPU_CONTAINER"
 APPTAINER_FLAGS=(--nv)
 # <% else %>
-CONTAINER="$CPU_CONTAINER"
 APPTAINER_FLAGS=()
 # <% end %>
 
