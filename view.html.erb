@@ -61,10 +61,14 @@
     const scope = document.currentScript.parentElement;
     const launchBtn = scope.querySelector(".launch-btn");
     const storeApiKey = function () {
-      localStorage.setItem(
-        "LlamaCppWebui.config",
-        '{"apiKey":"<%= password %>"}',
-      );
+      let config = {};
+      try {
+        config = JSON.parse(localStorage.getItem("LlamaUi.config") || "{}");
+      } catch {
+        config = {};
+      }
+      config.apiKey = "<%= password %>";
+      localStorage.setItem("LlamaUi.config", JSON.stringify(config));
     };
     launchBtn.addEventListener("click", storeApiKey);
     launchBtn.addEventListener("mousedown", storeApiKey);
