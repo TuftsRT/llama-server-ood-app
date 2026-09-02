@@ -6,7 +6,6 @@ cluster: "pax"
 # <% read_local = ->(path) { File.read(File.join(__dir__, path)) } %>
 
 form_header: |
-<%= read_local.call("partials/acceptable-use.html").rstrip.indent(2) %>
 <%= read_local.call("partials/ai-disclaimer.html").rstrip.indent(2) %>
 <%= read_local.call("partials/data-retention.html").rstrip.indent(2) %>
   <h4>Job Configuration</h4>
