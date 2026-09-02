@@ -66,6 +66,7 @@
         '{"apiKey":"<%= password %>"}',
       );
     };
+    launchBtn.addEventListener("click", storeApiKey);
     launchBtn.addEventListener("mousedown", storeApiKey);
     launchBtn.addEventListener("touchstart", storeApiKey);
     scope.querySelectorAll(".copy-btn").forEach((btn) => {
