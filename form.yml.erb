@@ -442,6 +442,8 @@ attributes:
     value: "<%= default_model[:model_path] %>"
     options: <%= JSON.generate(models.options) %>
 
+  # <% gguf_regex = '^/(cluster/(tufts|home)/[A-Za-z0-9_\-\.]+(/[A-Za-z0-9_\-\.]+)*)\.gguf$' %>
+
   model_file:
     widget: "text_field"
     label: "Model File"
@@ -467,8 +469,7 @@ attributes:
         </li>
       </ul>
     value: "<%= default_model[:model_path] %>"
-    pattern: |-
-      ^/(cluster/(tufts|home)/[A-Za-z0-9_\-\.]+(/[A-Za-z0-9_\-\.]+)*)\.gguf$
+    pattern: <%= gguf_regex %>
 
   mmproj_file:
     widget: "text_field"
@@ -489,8 +490,7 @@ attributes:
         </li>
       </ul>
     value: "<%= default_model[:mmproj_path] %>"
-    pattern: |-
-      ^/(cluster/(tufts|home))(?:/[A-Za-z0-9_\-\.]+)*/mmproj-[A-Za-z0-9_-]+\.gguf$
+    pattern: <%= gguf_regex %>
 
   # <% key_len = 32 %>
   # <% api_key = SecureRandom.alphanumeric(key_len) %>
