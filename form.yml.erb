@@ -7,6 +7,7 @@ cluster: "pax"
 
 form_header: |
 <%= read_local.call("partials/data-retention.html").rstrip.indent(2) %>
+<%= read_local.call("partials/api-encryption.html").rstrip.indent(2) %>
 <%= read_local.call("partials/ai-disclaimer.html").rstrip.indent(2) %>
   <h4>Job Configuration</h4>
 
