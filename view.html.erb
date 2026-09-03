@@ -4,8 +4,8 @@
       ><strong> Base URL </strong></span
     >
     <span class="form-control"
-      ><code data-id="base-url"
-        >http://<%= host %>.pax.tufts.edu:<%= port %></code
+      ><samp data-id="base-url"
+        >http://<%= host %>.pax.tufts.edu:<%= port %></samp
       ></span
     >
     <button
@@ -22,7 +22,7 @@
       ><strong> API Key </strong></span
     >
     <span class="form-control"
-      ><code data-id="api-key"><%= password %></code></span
+      ><samp data-id="api-key"><%= password %></samp></span
     >
     <button
       class="btn btn-light far fa-copy copy-btn"
@@ -34,6 +34,11 @@
     ></button>
   </div>
 </div>
+
+<p class="small text-danger mt-3 mb-0">
+  <i class="fa fa-warning" aria-hidden="true"></i>
+  API traffic unencrypted. Do not transmit sensitive information.
+</p>
 
 <hr />
 
