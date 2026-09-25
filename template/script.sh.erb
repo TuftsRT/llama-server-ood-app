@@ -1,21 +1,10 @@
 #!/bin/bash
 
-CONTAINER_DIR="/cluster/tufts/apps/container/ai/images/llama-server"
-CONTAINER_NAME="llama-server-latest.sif"
-CONTAINER="$CONTAINER_DIR/$CONTAINER_NAME"
-
-# <% use_gpu = context.use_preset == "1" || context.gpu_preference != "none" %>
 # <% if context.use_preset == "1" %>
 #   <% n_cpu = context.resource_preset.split("/", 3).last.to_i %>
 #   <% n_cpu = n_cpu * context.preset_multiplier.to_i %>
 # <% else %>
 #   <% n_cpu = context.num_cores.to_i %>
-# <% end %>
-
-# <% if use_gpu %>
-APPTAINER_FLAGS=(--nv)
-# <% else %>
-APPTAINER_FLAGS=()
 # <% end %>
 
 # shellcheck disable=SC2154
@@ -42,9 +31,9 @@ ARGS=(
 )
 
 module purge
-module load apptainer
+module load ai-tools llama.cpp
 
 # shellcheck disable=SC2154
 export LLAMA_API_KEY="$password"
 
-apptainer run "${APPTAINER_FLAGS[@]}" "$CONTAINER" "${ARGS[@]}"
+llama-server "${ARGS[@]}"
