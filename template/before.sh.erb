@@ -1,4 +1,5 @@
 #! /bin/bash
+set -euo pipefail
 export output_log="<%= session.staged_root.join('output.log') %>"
 export password="<%= context.api_key %>"
 port="$(find_port)"
