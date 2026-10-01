@@ -19,7 +19,9 @@ GPU_LIST = [
   Gpu.new('rtx_a6000', 'RTX A6000', 48),
   Gpu.new('a100', 'A100', 80),
   Gpu.new('h100', 'H100', 80),
-  Gpu.new('h200', 'H200', 141)
+  Gpu.new('rtx_pro_6000', 'RTX PRO 6000', 96),
+  Gpu.new('h200', 'H200', 141),
+  Gpu.new('b200', 'B200', 192)
 ].freeze
 
 def gpu_vram_levels
