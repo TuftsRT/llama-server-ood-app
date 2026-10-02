@@ -12,6 +12,7 @@
     "rnode",
     "rstrip",
     "securerandom",
+    "slurm",
     "webui"
   ]
 }

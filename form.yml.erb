@@ -22,7 +22,11 @@ form:
   - "exact_vram"
   - "gpu_model"
   - "num_gpu"
+  - "advanced_scheduling"
+  - "priority_start"
   - "allow_preempt"
+  - "extra_partitions"
+  - "slurm_reservation"
   - "use_router"
   - "use_default_models"
   - "models_dir"
@@ -66,7 +70,6 @@ attributes:
           "Use Resource Presets (Recommended)",
           "1",
           {
-            data-hide-allow-preempt: true,
             data-hide-exact-vram: true,
             data-hide-gpu-model: true,
             data-hide-gpu-preference: true,
@@ -271,14 +274,57 @@ attributes:
     max: 8
     step: 1
 
+  advanced_scheduling:
+    widget: "check_box"
+    label: "Use Advanced Scheduling Options"
+    cacheable: true
+    help: >-
+      Configure priority start, preemption, additional partitions,
+      and reservations.
+    html_options:
+      data:
+        hide-allow-preempt-when-un-checked: true
+        hide-extra-partitions-when-un-checked: true
+        hide-priority-start-when-un-checked: true
+        hide-slurm-reservation-when-un-checked: true
+
+  priority_start:
+    widget: "check_box"
+    label: "Request Priority Start"
+    cacheable: false
+    help: >-
+      Ask to skip the queue and start as soon as possible. Limited to a single
+      priority job at a time and a maximum runtime of 4 hours. Submission will
+      fail if either limit is exceeded.
+
   allow_preempt:
     widget: "check_box"
     label: "Allow Preemption"
     cacheable: false
     help: >-
-      Gain access to reserved resources and potentially start the job sooner
-      by allowing your job to be preempted (terminated without warning) if
-      higher-priority jobs need resources.
+      Gain access to idle reserved resources and potentially start sooner
+      by allowing your job to be preempted (terminated without warning)
+      if higher-priority jobs need resources.
+
+  # <% csv_regex = '^\s*[A-Za-z0-9_\-\.]+(\s*,\s*[A-Za-z0-9_\-\.]+)*\s*$' %>
+
+  extra_partitions:
+    widget: "text_field"
+    label: "Additional Partitions"
+    cacheable: true
+    help: "Comma-separated list of partitions to consider alongside defaults."
+    pattern: '<%= csv_regex %>'
+    html_options:
+      class: "font-monospace"
+
+  slurm_reservation:
+    widget: "text_field"
+    label: "Slurm Reservations"
+    cacheable: false
+    help: "Comma-separated list of reservations to consider."
+    pattern: '<%= csv_regex %>'
+    html_options:
+      class: "font-monospace"
 
   # <% load File.join(__dir__, "lib/model_discovery.rb") %>
   # <% models_dir = "/cluster/tufts/datasets/ai/models/gguf" %>

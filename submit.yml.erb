@@ -21,9 +21,14 @@
 #   <% elsif gpu_preference == "gpu-model" %>
 #     <% constraint = gpu_model %>
 #   <% end %>
-#   <% if allow_preempt == "1" %>
-#     <% partition = "#{partition},preempt" %>
-#   <% end %>
+# <% end %>
+# <% split_list = ->(str) { str.split(",").map(&:strip).reject(&:empty?) } %>
+# <% partitions = [partition] %>
+# <% if advanced_scheduling == "1" %>
+#   <% partitions = split_list.call(extra_partitions) + partitions %>
+#   <% partitions << "preempt" if allow_preempt == "1" %>
+#   <% reservations = split_list.call(slurm_reservation) %>
+#   <% qos = "interactive" if priority_start == "1" %>
 # <% end %>
 ---
 batch_connect:
@@ -37,10 +42,16 @@ script:
     - "--nodes=1"
     - "--ntasks=1"
     - "--cpus-per-task=<%= n_cpu %>"
-    - "--partition=<%= partition %>"
+    - "--partition=<%= partitions.uniq.join(",") %>"
     # <% if n_gpu.to_i > 0 %>
     - "--gres=gpu:<%= n_gpu %>"
     # <% end %>
     # <% if constraint.present? %>
     - "--constraint=<%= constraint %>"
+    # <% end %>
+    # <% if reservations.present? %>
+    - "--reservation=<%= reservations.uniq.join(",") %>"
+    # <% end %>
+    # <% if qos.present? %>
+    - "--qos=<%= qos %>"
     # <% end %>
