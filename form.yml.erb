@@ -424,6 +424,8 @@ attributes:
     value: "<%= models_dir %>"
     pattern: |-
       ^/(cluster/(tufts|home)/[A-Za-z0-9_\-\.]+(/[A-Za-z0-9_\-\.]+)*)/?$
+    html_options:
+      class: "font-monospace"
 
   models_ini:
     widget: "text_field"
@@ -450,6 +452,8 @@ attributes:
     value: ""
     pattern: |-
       ^/(cluster/(tufts|home)/[A-Za-z0-9_\-\.]+(/[A-Za-z0-9_\-\.]+)*)\.ini$
+    html_options:
+      class: "font-monospace"
 
   use_custom_model:
     widget: "select"
@@ -515,6 +519,8 @@ attributes:
       </ul>
     value: "<%= default_model[:model_path] %>"
     pattern: <%= gguf_regex %>
+    html_options:
+      class: "font-monospace"
 
   mmproj_file:
     widget: "text_field"
@@ -536,6 +542,8 @@ attributes:
       </ul>
     value: "<%= default_model[:mmproj_path] %>"
     pattern: <%= gguf_regex %>
+    html_options:
+      class: "font-monospace"
 
   # <% key_len = 32 %>
   # <% api_key = SecureRandom.alphanumeric(key_len) %>
