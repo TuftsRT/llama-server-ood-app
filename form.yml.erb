@@ -329,7 +329,7 @@ attributes:
   # <% load File.join(__dir__, "lib/model_discovery.rb") %>
   # <% models_dir = "/cluster/tufts/datasets/ai/models/gguf" %>
   # <% models = discover_models(models_dir) %>
-  # <% default_model = models.find_by_label("Qwen3.6-27B-UD-Q8_K_XL") %>
+  # <% default_model = models.default_entry %>
 
   use_router:
     widget: "select"

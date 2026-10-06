@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
+require 'yaml'
+
 class ModelDiscovery # rubocop:disable Style/Documentation
-  def initialize(entries)
+  def initialize(entries, default_label = nil)
     @entries = entries
+    @default_label = default_label
   end
 
   def options
@@ -18,21 +21,35 @@ class ModelDiscovery # rubocop:disable Style/Documentation
     end
   end
 
-  def find_by_label(label)
-    @entries.find { |m| m[:label] == label } ||
+  def default_entry
+    @entries.find { |m| m[:label] == @default_label } || @entries.first ||
       { model_path: '', mmproj_path: '' }
   end
 
   private
 
-  def display_label(m)
-    return m[:label] unless m[:size_bytes]&.positive?
-    "#{m[:label]} (#{format_size(m[:size_bytes])})"
+  def display_label(entry)
+    return entry[:label] unless entry[:size_bytes]&.positive?
+
+    "#{entry[:label]} (#{format_size(entry[:size_bytes])})"
   end
 
   def format_size(bytes)
     "#{(bytes.to_f / 1.gigabyte).ceil} GB"
   end
+end
+
+def read_default_label(base_dir)
+  catalog = YAML.safe_load_file(File.join(base_dir, '.catalog.yaml'))
+  return nil unless catalog.is_a?(Hash)
+
+  value = catalog['default_model']
+  return nil unless value.is_a?(String)
+
+  label = File.basename(value.strip.chomp('/'), '.gguf')
+  label.empty? ? nil : label
+rescue Psych::Exception, SystemCallError, IOError, ArgumentError, EncodingError
+  nil
 end
 
 def mmproj?(filename)
@@ -69,5 +86,5 @@ def discover_models(base_dir) # rubocop:disable Metrics
     end
   end
 
-  ModelDiscovery.new(entries)
+  ModelDiscovery.new(entries, read_default_label(base_dir))
 end
