@@ -237,8 +237,8 @@ attributes:
     help: >-
       Automatically select a GPU with VRAM equaling or exceeding the
       selected option. Higher values might delay job start.
-    value: "<%= min_vram_options.first.last %>"
-    options: <%= JSON.generate(min_vram_options) %>
+    value: "<%= GpuConfig.min_vram_options.first.last %>"
+    options: <%= JSON.generate(GpuConfig.min_vram_options) %>
 
   exact_vram:
     widget: "select"
@@ -247,8 +247,8 @@ attributes:
     help: >-
       Automatically select a GPU with exactly the selected VRAM.
       Subject to GPU availability.
-    value: "<%= exact_vram_options.first.last %>"
-    options: <%= JSON.generate(exact_vram_options) %>
+    value: "<%= GpuConfig.exact_vram_options.first.last %>"
+    options: <%= JSON.generate(GpuConfig.exact_vram_options) %>
 
   gpu_model:
     widget: "select"
@@ -257,8 +257,8 @@ attributes:
     help: >-
       Only use if a specific GPU model is required.
       Might delay job start due to GPU availability.
-    value: "<%= gpu_model_options.first.last %>"
-    options: <%= JSON.generate(gpu_model_options) %>
+    value: "<%= GpuConfig.gpu_model_options.first.last %>"
+    options: <%= JSON.generate(GpuConfig.gpu_model_options) %>
 
   num_gpu:
     widget: "number_field"
