@@ -328,7 +328,7 @@ attributes:
 
   # <% load File.join(__dir__, "lib/model_discovery.rb") %>
   # <% models_dir = "/cluster/tufts/datasets/ai/models/gguf" %>
-  # <% models = discover_models(models_dir) %>
+  # <% models = ModelDiscovery.discover(models_dir) %>
   # <% default_model = models.default_entry %>
 
   use_router:
