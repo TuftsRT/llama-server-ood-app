@@ -16,8 +16,7 @@ module GpuConfig # rubocop:disable Style/Documentation
       ['a100', 'A100', 80],
       ['h100', 'H100', 80],
       ['rtx_pro_6000', 'RTX PRO 6000', 96],
-      ['h200', 'H200', 141],
-      ['b200', 'B200', 192]
+      ['h200', 'H200', 141]
     ].map do |value, name, vram|
       { name: name, vram: vram, constraint: "#{value}-#{vram}G" }
     end
