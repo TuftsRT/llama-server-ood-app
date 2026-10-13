@@ -33,7 +33,11 @@ ARGS=(
 )
 
 module purge
-module load ai-tools llama.cpp
+# <% llama_module = "llama.cpp" %>
+# <% if context.llama_version.present? %>
+#   <% llama_module = "#{llama_module}/#{context.llama_version}" %>
+# <% end %>
+module load ai-tools "<%= llama_module %>"
 
 # shellcheck disable=SC2154
 export LLAMA_API_KEY="$password"

@@ -37,6 +37,7 @@ form:
   - "mmproj_file"
   - "use_random_key"
   - "api_key"
+  - "llama_version"
 
 # <% max_hours = 48 %>
 
@@ -581,3 +582,17 @@ attributes:
     pattern: "^[a-zA-Z0-9]{<%= key_len %>,}$"
     html_options:
       class: "font-monospace"
+
+  # <% load File.join(__dir__, "lib/module_versions.rb") %>
+  # <% llama_versions = ModuleVersions.list("/cluster/tufts/apps/container/ai/modules/llama.cpp") %>
+
+  llama_version:
+    widget: "select"
+    label: "LLaMA CPP Version"
+    cacheable: false
+    help: >-
+      The latest version (default) includes bug fixes and support for newer
+      models. Use an older version only to reproduce earlier results or when
+      a model or workflow requires it.
+    value: "<%= llama_versions.first %>"
+    options: <%= JSON.generate(llama_versions) %>
